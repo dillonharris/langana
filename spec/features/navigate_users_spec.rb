@@ -1,14 +1,5 @@
 require 'rails_helper'
 
-def user_attributes(overrides = {})
-  {
-    name: "Example User",
-    email: "user@example.com",
-    password: "secret",
-    password_confirmation: "secret"
-  }.merge(overrides)
-end
-
 describe "Navigating users" do
   it "allows navigation from the profile page to the listing page" do
     user = User.create(user_attributes)
@@ -19,4 +10,15 @@ describe "Navigating users" do
 
     expect(current_path).to eq(users_path)
   end
+
+  it "allows navigation from the listing page to the profile page" do
+    user = User.create(user_attributes)
+
+    visit users_url
+
+    click_link user.name
+
+    expect(current_path).to eq(user_path(user))
+  end
+
 end
