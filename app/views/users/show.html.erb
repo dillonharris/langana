@@ -1,9 +1,8 @@
-<% content_for(:title, @user.name) %>
+<% content_for(:name, @user.name) %>
 
 <article id="user">
   <header>
     <h1><%= @user.name %></h1>
     <h2><%= mail_to(@user.email) %></h2>
   </header>
-<%= link_to 'All Users', users_path %>
 </article>
