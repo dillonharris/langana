@@ -1,41 +1,44 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe "A user" do
-
+      
   it "requires a name" do
     user = User.new(name: "")
     
-    user.valid? # populates errors
-
+    expect(user.valid?).to eq(false)
     expect(user.errors[:name].any?).to eq(true)
   end
-
+  
   it "requires an email" do
     user = User.new(email: "")
-
-    user.valid?
-
+    
+    user.valid? # populates errors
+    
     expect(user.errors[:email].any?).to eq(true)
   end
-
+      
   it "accepts properly formatted email addresses" do
     emails = %w[user@example.com first.last@example.com]
     emails.each do |email|
       user = User.new(email: email)
+      
       user.valid?
+
       expect(user.errors[:email].any?).to eq(false)
     end
   end
-
+  
   it "rejects improperly formatted email addresses" do
     emails = %w[@ user@ @example.com]
     emails.each do |email|
       user = User.new(email: email)
+      
       user.valid?
+
       expect(user.errors[:email].any?).to eq(true)
     end
   end
-
+  
   it "requires a unique, case insensitive email address" do
     user1 = User.create!(user_attributes)
 
@@ -43,13 +46,13 @@ describe "A user" do
     user2.valid?
     expect(user2.errors[:email].first).to eq("has already been taken")
   end
-
+  
   it "is valid with example attributes" do
     user = User.new(user_attributes)
-
+    
     expect(user.valid?).to eq(true)
   end
-
+  
   it "requires a password" do
     user = User.new(password: "")
 

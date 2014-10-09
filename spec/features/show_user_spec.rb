@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe "Viewing an individual user" do
-  it "shows the user's details" do
-    
+
+  it "shows the user's details" do    
     user = User.create(user_attributes)
 
     visit "http://example.com/users/#{user.id}"
