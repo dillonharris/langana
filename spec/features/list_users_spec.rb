@@ -1,13 +1,5 @@
 require 'rails_helper'
-
-def user_attributes(overrides = {})
-  {
-    name: "Example User",
-    email: "user@example.com",
-    password: "secret",
-    password_confirmation: "secret"
-  }.merge(overrides)
-end
+require 'support/attributes'
 
 describe "Viewing the list of users" do
 
