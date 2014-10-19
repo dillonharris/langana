@@ -14,9 +14,11 @@ describe "Navigating users" do
   it "allows navigation from the listing page to the profile page" do
     user = User.create(user_attributes)
 
+    sign_in(user)
+
     visit users_url
 
-    click_link user.name
+    first(:link, user.name).click
 
     expect(current_path).to eq(user_path(user))
   end
