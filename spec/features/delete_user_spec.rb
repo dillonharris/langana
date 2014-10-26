@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'support/attributes'
+require 'support/authentication'
 
 describe "Deleting a user" do 
   it "destroys the user and redirects to the home page" do

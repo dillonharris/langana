@@ -1,4 +1,4 @@
-<%= form_for [@user, @review] do |f| %>
+<%= form_for [@user, @review], url: user_reviews_path, method: :post do |f| %>
   <%= render "shared/errors", object: @review %>
   <fieldset>
     <ol>

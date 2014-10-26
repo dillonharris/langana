@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'support/attributes'
+require 'support/authentication'
 
 describe "Creating a new review" do
   it "saves the review and shows the review on the user's detail page" do
@@ -27,11 +29,11 @@ describe "Creating a new review" do
 
     expect(current_path).to eq(user_path(user2))
 
-    expect(page).to have_text("Thanks for your review!")
+    expect(page).to have_text("Thanks for giving a reference!")
     expect(page).to have_text("They installed more ram")
   end
 
-  xit "does not save the review if it's invalid" do
+  it "does not save the review if it's invalid" do
     user1 = User.create!(user_attributes)
     user2 = User.create!({
                         name: "Other Person",
@@ -49,7 +51,7 @@ describe "Creating a new review" do
 
     expect {
       click_button 'Post Reference'
-    }.not_to change(Reference, :count)
+    }.not_to change(Review, :count)
 
     expect(page).to have_text('error')
   end

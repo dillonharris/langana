@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :references, class_name: 'Review', foreign_key: :reviewed_id, dependent: :destroy
-  has_many :reviewed, class_name: 'Review', foreign_key: :reference_id, dependent: :destroy
+  has_many :references, class_name: 'Review', foreign_key: :reviewed_id, dependent: :delete_all
+  has_many :reviewed, class_name: 'Review', foreign_key: :reference_id, dependent: :delete_all
 
   validates :name, presence: true
 

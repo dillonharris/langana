@@ -5,9 +5,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
+    @user = User.find(params[:user_id])
+    @review = Review.new({
+      work: review_params['work'], 
+      comment: review_params['comment'], 
+      reviewed: @user,
+      reference: current_user
+    })
+
     if @review.save
-      redirect_to @user, notice: "Thanks for giving a reference!"
+      redirect_to @review.reviewed, notice: "Thanks for giving a reference!"
     else
       render :new
     end 
@@ -19,5 +26,4 @@ class ReviewsController < ApplicationController
     params.require(:review).
     permit(:work, :comment)
   end
-
 end

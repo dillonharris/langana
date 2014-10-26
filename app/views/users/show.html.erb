@@ -17,5 +17,18 @@
         <%= link_to 'Give Reference', new_user_review_path(@user), class: 'button' %>
       <% end %>
     </nav>
+
+  <ul id="users">
+    <% @user.references.each do |reference| %>
+      <li>
+        <%= link_to reference.reference.name, reference.reference %>
+        <%= reference.work %>
+        :
+        <%= reference.comment %>   
+      </li>
+    <% end %>
+  </ul>
+
+
   </footer>
 </article>
