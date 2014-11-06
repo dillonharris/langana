@@ -33,5 +33,4 @@ describe "Creating a new user" do
     expect(page).to have_text('error')
   end
 
-
 end

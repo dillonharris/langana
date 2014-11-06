@@ -23,11 +23,12 @@
     <% @user.references.each do |reference| %>
       <li>
         <p>
-        <%= reference.work %>
+        <%= reference.work.capitalize %>
         for 
         <%= link_to reference.reference.name, reference.reference %>
         </p>
-        <%= reference.comment %>   
+        <%= reference.comment %>
+        <%= reference.created_at.strftime("%d %b. %Y") %>
       </li>
     <% end %>
   </ul>
