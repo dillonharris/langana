@@ -22,13 +22,16 @@
     <h3>References</h3>
     <% @user.references.each do |reference| %>
       <li>
-        <p>
+        <div>
         <%= reference.work.capitalize %>
         for 
         <%= link_to reference.reference.name, reference.reference %>
-        </p>
+        </div>
         <%= reference.comment %>
+        <div>
+        Reviewed on
         <%= reference.created_at.strftime("%d %b. %Y") %>
+        </div>
       </li>
     <% end %>
   </ul>
