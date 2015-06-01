@@ -46,7 +46,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
-  gem "minitest"
+#  gem "minitest"
   gem 'rspec-rails', '~> 3.1.0'
 end
 
