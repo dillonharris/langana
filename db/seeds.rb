@@ -8,33 +8,17 @@
 
 User.create!([
   {
-    name: "De Wet Blomerus",
-    email: "dewet@example.com",
+    first_name: "De Wet",
+    last_name: "Blomerus",
+    mobile_number: "0792958514",
     password: "secret",
     password_confirmation: "secret"
   },
   {
-    name: "Marysol Blomerus",
-    email: "marysol@example.com",
+    first_name: "Marysol",
+    last_name: "Blomerus",
+    mobile_number: "0722857438",
     password: "secret",
     password_confirmation: "secret"
   },
-  {
-    name: "Kenwin Fortuin",
-    email: "kenwin@example.com",
-    password: "secret",
-    password_confirmation: "secret"
-  },
-  {
-    name: "Jeremy Ramos",
-    email: "jeremy@example.com",
-    password: "secret",
-    password_confirmation: "secret"
-  },
-  {
-    name: "Alain Kalima",
-    email: "alain@example.com",
-    password: "secret",
-    password_confirmation: "secret"
-  }
 ])

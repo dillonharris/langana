@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_blank: true }
 
   def gravatar_id
-    Digest::MD5::hexdigest(email.downcase)
+    Digest::MD5::hexdigest(email.downcase) if email
   end
 
   def self.authenticate(mobile_number, password)

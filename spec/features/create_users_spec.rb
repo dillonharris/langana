@@ -8,11 +8,11 @@ describe "Creating a new user" do
 
     expect(current_path).to eq(signup_path)
 
-    fill_in "Frist name",  with: "Usie"
-    fill_in "Last name", with: "Userson"
-    fill_in "Mobile Number", with: "0792857438"
-    fill_in "Password", with: "secret"
-    fill_in "Confirm Password", with: "secret"
+    fill_in "user_first_name",  with: "Usie"
+    fill_in "user_last_name", with: "Userson"
+    fill_in "user_mobile_number", with: "0792857438"
+    fill_in "user_password", with: "secret"
+    fill_in "user_password_confirmation", with: "secret"
 
     click_button 'Create Account'
 
