@@ -13,15 +13,15 @@ describe "Editing a user" do
 
     expect(current_path).to eq(edit_user_path(user))
 
-    expect(find_field('Name').value).to eq(user.name)
+    expect(find_field('First name').value).to eq(user.first_name)
 
-    fill_in "Name", with: "Updated User Name"
+    fill_in "First name", with: "Updated User First name"
 
     click_button "Update Account"
 
     expect(current_path).to eq(user_path(user))
 
-    expect(page).to have_text("Updated User Name")
+    expect(page).to have_text("Updated User First name")
     expect(page).to have_text('Account successfully updated!')
   end
 
@@ -32,7 +32,7 @@ describe "Editing a user" do
 
     visit edit_user_url(user)
 
-    fill_in 'Name', with: " "
+    fill_in 'First name', with: " "
 
     click_button "Update Account"
 

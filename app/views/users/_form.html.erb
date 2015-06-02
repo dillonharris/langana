@@ -3,12 +3,16 @@
   <fieldset>
     <ol>
       <li class="required">
-        <%= f.label :name %>
-        <%= f.text_field :name, size: 40, autofocus: true %>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, size: 40, autofocus: true %>
       </li>
       <li class="required">
-        <%= f.label :email %>
-        <%= f.email_field :email, size: 40 %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, size: 40 %>
+      </li>
+      <li class="required">
+        <%= f.label :mobile_number %>
+        <%= f.telephone_field :mobile_number, size: 12 %>
       </li>
       <li class="required">
         <%= f.label :password %>
