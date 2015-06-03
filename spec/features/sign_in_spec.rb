@@ -27,9 +27,9 @@ describe "Signing in" do
 
     expect(current_path).to eq(user_path(user))
 
-    expect(page).to have_text("Welcome back, #{user.name}!")
+    expect(page).to have_text("Welcome back, #{user.first_name}!")
 
-    expect(page).to have_link(user.name)
+    expect(page).to have_link(user.first_name)
     expect(page).not_to have_link('Sign In')
     expect(page).not_to have_link('Sign Up')
     expect(page).to have_link('Account Settings')
@@ -49,7 +49,7 @@ describe "Signing in" do
     click_button 'Sign In'
 
     expect(page).to have_text('Invalid')
-    expect(page).not_to have_link(user.name)
+    expect(page).not_to have_link(user.first_name)
     expect(page).to have_link('Sign In')
     expect(page).to have_link('Sign Up')
     expect(page).not_to have_link('Sign Out')
@@ -59,6 +59,7 @@ describe "Signing in" do
     user1 = User.create!(user_attributes)
     user2 = User.create!({
                         first_name: "Other",
+			last_name: "Otherson",
                         mobile_number: "0761231234",
                         password: "secret",
                         password_confirmation: "secret"

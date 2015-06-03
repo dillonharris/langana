@@ -18,7 +18,7 @@ describe "Navigating users" do
 
     visit users_url
 
-    first(:link, user.name).click
+    first(:link, user.first_name).click
 
     expect(current_path).to eq(user_path(user))
   end
