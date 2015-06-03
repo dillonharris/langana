@@ -18,7 +18,7 @@ describe "Creating a new user" do
 
     expect(current_path).to eq(user_path(User.last))
 
-    expect(page).to have_text('Usie Userson')
+    expect(page).to have_text('Usie')
     expect(page).to have_text('Thanks for signing up!')
     expect(page).not_to have_link('Sign In')
     expect(page).not_to have_link('Sign Up')
