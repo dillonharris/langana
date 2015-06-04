@@ -7,8 +7,8 @@ class ReviewsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @review = Review.new({
-      work: review_params['work'], 
-      comment: review_params['comment'], 
+      work: review_params['work'],
+      comment: review_params['comment'],
       reviewed: @user,
       reference: current_user
     })
@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
       redirect_to @review.reviewed, notice: "Thanks for giving a reference!"
     else
       render :new
-    end 
+    end
   end
 
   private

@@ -3,6 +3,17 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+
+def user_attributes(overrides = {})
+  {
+    first_name: "Usie",
+    last_name: "Userson",
+    mobile_number: "0791231234",
+    password: "secret",
+    password_confirmation: "secret"
+  }.merge(overrides)
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

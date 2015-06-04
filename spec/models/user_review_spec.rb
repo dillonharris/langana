@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'given a user called pete and a review for pete' do
   before do
-    @pete = User.create name: 'Pete', password: 'bl@h1112', email: 'some@email.com'
-    @jim = User.create name: 'Jim', password: 'bl@h1112', email: 'some@email.com'
+    @pete = User.create first_name: 'Pete', last_name: 'Peterson', password: 'bl@h1112', mobile_number: '0717893456'
+    @jim = User.create first_name: 'Jim', last_name: 'Hendrics', password: 'bl@h1112', mobile_number: '0796546543'
     @review = Review.create work: 'IT', reviewed: @pete, reference: @jim
   end
 

@@ -6,8 +6,9 @@ describe "Creating a new review" do
   it "saves the review and shows the review on the user's detail page" do
     user1 = User.create!(user_attributes)
     user2 = User.create!({
-                        name: "Jeremy Ramos",
-                        email: "other@example.com",
+                        first_name: "Jeremy",
+                        last_name: "Ramos",
+                        mobile_number: "0723423458",
                         password: "secret",
                         password_confirmation: "secret"
                       })
@@ -21,7 +22,7 @@ describe "Creating a new review" do
 
     expect(current_path).to eq(new_user_review_path(user2))
 
-    fill_in "What work did #{user2.name} do for you?", with: "#{user2.name} fixed my computer"
+    fill_in "What work did #{user2.first_name} do for you?", with: "#{user2.first_name} fixed my computer"
 
     fill_in "Comment", with: "They installed more ram, reinstalled my OS and restored all of my data. I could not be happier"
 
@@ -36,8 +37,9 @@ describe "Creating a new review" do
   it "does not save the review if it's invalid" do
     user1 = User.create!(user_attributes)
     user2 = User.create!({
-                        name: "Other Person",
-                        email: "other@example.com",
+                        first_name: "Other",
+                        last_name: "Person",
+                        mobile_number: "0723423459",
                         password: "secret",
                         password_confirmation: "secret"
                       })
