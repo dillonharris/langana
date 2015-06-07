@@ -1,8 +1,8 @@
 require 'rails_helper'
 require 'support/authentication'
 
-describe "Creating a new review" do
-  it "saves the review and shows the review on the user's detail page" do
+describe "Creating a new work reference" do
+  it "saves the work reference and shows the reference on the user's detail page" do
     user1 = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user,
                         first_name: "Jeremy",
@@ -19,13 +19,13 @@ describe "Creating a new review" do
 
     click_link 'Give Reference'
 
-    expect(current_path).to eq(new_user_review_path(user2))
+    expect(current_path).to eq(new_user_work_reference_path(user2))
 
     fill_in "What work did #{user2.first_name} do for you?", with: "#{user2.first_name} fixed my computer"
 
     fill_in "Comment", with: "They installed more ram, reinstalled my OS and restored all of my data. I could not be happier"
 
-    click_button 'Post Reference'
+    click_button 'Save Reference'
 
     expect(current_path).to eq(user_path(user2))
 
@@ -51,8 +51,8 @@ describe "Creating a new review" do
     click_link 'Give Reference'
 
     expect {
-      click_button 'Post Reference'
-    }.not_to change(Review, :count)
+      click_button 'Save Reference'
+    }.not_to change(WorkReference, :count)
 
     expect(page).to have_text('error')
   end

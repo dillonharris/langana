@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :references, class_name: 'Review', foreign_key: :reviewed_id, dependent: :delete_all
-  has_many :reviewed, class_name: 'Review', foreign_key: :reference_id, dependent: :delete_all
+  has_many :work_references_received, class_name: "WorkReference", foreign_key: :worker_user_id
+  has_many :work_references_written, class_name: "WorkReference", foreign_key: :employer_user_id
+
   mount_uploader :profile_picture, ProfilePictureUploader
 
   validates_presence_of :first_name, :last_name, :mobile_number

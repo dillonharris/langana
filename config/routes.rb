@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   resources :users do
-    resources :reviews
+    resources :work_references
   end
 end

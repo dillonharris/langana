@@ -14,28 +14,11 @@
                     data: { confirm: 'Are you sure you want to permanently delete your account?' },
                     class: 'button' %>
       <% else %>
-        <%= link_to 'Give Reference', new_user_review_path(@user), class: 'button' %>
+        <%= link_to 'Give Reference', new_user_work_reference_path(@user), class: 'button' %>
       <% end %>
     </nav>
 
-  <ul id="users">
-    <h3>References</h3>
-    <% @user.references.each do |reference| %>
-      <li>
-        <div>
-        <%= reference.work.capitalize %>
-        for
-        <%= link_to reference.reference.first_name, reference.reference %>
-        </div>
-        <%= reference.comment %>
-        <div>
-        Reviewed on
-        <%= reference.created_at.strftime("%d %b. %Y") %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-
+    <%= render 'work_references' %>
 
   </footer>
 </article>
