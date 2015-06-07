@@ -4,13 +4,13 @@
     <h1><%= @user.name %></h1>
     <h2><%= mail_to(@user.email) %></h2>
   </header>
-  
+
   <footer>
     <nav>
       <% if current_user?(@user) %>
         <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
-        <%= link_to 'Delete Account', @user, 
-                    method: :delete, 
+        <%= link_to 'Delete Account', @user,
+                    method: :delete,
                     data: { confirm: 'Are you sure you want to permanently delete your account?' },
                     class: 'button' %>
       <% else %>
@@ -24,8 +24,8 @@
       <li>
         <div>
         <%= reference.work.capitalize %>
-        for 
-        <%= link_to reference.reference.name, reference.reference %>
+        for
+        <%= link_to reference.reference.first_name, reference.reference %>
         </div>
         <%= reference.comment %>
         <div>
