@@ -6,7 +6,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :mobile_number
       t.string :email
       t.string :password_digest
-      t.boolean :admin, default: false
+      t.string :profile_picture
+      t.string :sms_confirmation_token_digest
+      t.datetime :confirmed_at
+      t.datetime :sms_confirmation_sent_at
+      t.integer :role
 
       t.timestamps
     end
