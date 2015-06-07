@@ -1,6 +1,6 @@
 <article id="user">
   <header>
-    <%= image_tag @user.profile_picture.large.url %>
+    <%= image_tag @user.profile_picture.url %>
     <h1><%= @user.name %></h1>
     <h2><%= mail_to(@user.email) %></h2>
   </header>
