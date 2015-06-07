@@ -9,7 +9,7 @@ describe "Viewing an individual user" do
 
     visit user_url(user)
 
-    expect(page).to have_text(user.name)
+    expect(page).to have_text(user.first_name)
     expect(page).to have_text(user.email)
   end
 end
