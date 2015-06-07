@@ -1,17 +1,16 @@
 require 'rails_helper'
-require 'support/attributes'
 require 'support/authentication'
 
 describe "Creating a new review" do
   it "saves the review and shows the review on the user's detail page" do
-    user1 = User.create!(user_attributes)
-    user2 = User.create!({
+    user1 = FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user,
                         first_name: "Jeremy",
                         last_name: "Ramos",
                         mobile_number: "0723423458",
                         password: "secret",
                         password_confirmation: "secret"
-                      })
+                      )
 
 
     sign_in(user1)
@@ -35,14 +34,14 @@ describe "Creating a new review" do
   end
 
   it "does not save the review if it's invalid" do
-    user1 = User.create!(user_attributes)
-    user2 = User.create!({
+    user1 = FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user,
                         first_name: "Other",
                         last_name: "Person",
                         mobile_number: "0723423459",
                         password: "secret",
                         password_confirmation: "secret"
-                      })
+                      )
 
 
     sign_in(user1)

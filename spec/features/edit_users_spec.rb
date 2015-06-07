@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Editing a user" do
 
   it "updates the user and shows the user's updated details" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 
@@ -26,7 +26,7 @@ describe "Editing a user" do
   end
 
   it "does not update the user if it's invalid" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 

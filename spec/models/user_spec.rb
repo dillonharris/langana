@@ -58,7 +58,7 @@ describe "A user" do
   end
 
   it "requires a unique mobile number" do
-    user1 = User.create!(user_attributes)
+    user1 = FactoryGirl.create(:user)
 
     user2 = User.new(mobile_number: user1.mobile_number)
     user2.valid?
@@ -66,7 +66,7 @@ describe "A user" do
   end
 
   it "is valid with example attributes" do
-    user = User.new(user_attributes)
+    user = FactoryGirl.create(:user)
 
     expect(user.valid?).to eq(true)
   end
@@ -96,13 +96,13 @@ describe "A user" do
   end
 
   it "requires a password and matching password confirmation when creating" do
-    user = User.create!(user_attributes(password: "secret", password_confirmation: "secret"))
+    user = FactoryGirl.create(:user, password: "secret", password_confirmation: "secret")
 
     expect(user.valid?).to eq(true)
   end
 
   it "does not require a password when updating" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     user.password = ""
 
@@ -118,7 +118,7 @@ end
 
 describe "authenticate" do
   before do
-    @user = User.create!(user_attributes)
+    @user = FactoryGirl.create(:user)
   end
 
   it "returns non-true value if the mobile number does not match" do

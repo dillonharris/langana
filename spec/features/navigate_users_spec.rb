@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Navigating users" do
   it "allows navigation from the profile page to the listing page" do
-    user = User.create(user_attributes)
+    user = FactoryGirl.create(:user)
 
     visit user_url(user)
 
@@ -12,7 +12,7 @@ describe "Navigating users" do
   end
 
   it "allows navigation from the listing page to the profile page" do
-    user = User.create(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 

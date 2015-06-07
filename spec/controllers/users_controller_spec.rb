@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UsersController do
 
   before do
-    @user = User.create!(user_attributes)
+    @user = User.create!(first_name: "User", last_name: "Userson", mobile_number: "0727777777", password: "secret")
   end
 
   context "when not signed in" do
@@ -35,7 +35,7 @@ describe UsersController do
   context "when signed in as the wrong user" do
 
     before do
-      @wrong_user = User.create!(user_attributes(mobile_number: "0791234567"))
+      @wrong_user = FactoryGirl.create(:user, mobile_number: "0791234567")
       session[:user_id] = @wrong_user
     end
 

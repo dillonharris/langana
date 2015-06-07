@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "Viewing an individual user" do
 
-  it "shows the user's details" do    
-    user = User.create(user_attributes)
+  it "shows the user's details" do
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 

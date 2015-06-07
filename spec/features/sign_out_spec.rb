@@ -4,7 +4,7 @@ require 'support/authentication'
 describe "Signing out" do
 
   it "removes the user id from the session" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 

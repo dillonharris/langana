@@ -14,7 +14,7 @@ describe "Signing in" do
   end
 
   it "signs in the user if the mobile number/password combination is valid" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     visit root_url
 
@@ -37,7 +37,7 @@ describe "Signing in" do
   end
 
   it "does not sign in the user if the mobile number/password combination is not valid" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     visit root_url
 
@@ -56,14 +56,14 @@ describe "Signing in" do
   end
 
   it "redirects to the intended page" do
-    user1 = User.create!(user_attributes)
-    user2 = User.create!({
+    user1 = FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user,
                         first_name: "Other",
 			last_name: "Otherson",
                         mobile_number: "0761231234",
                         password: "secret",
                         password_confirmation: "secret"
-                      })
+                      )
 
     visit user_path(user2)
 
@@ -73,5 +73,5 @@ describe "Signing in" do
 
     expect(current_path).to eq(user_path(user2))
   end
-
 end
+

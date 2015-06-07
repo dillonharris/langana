@@ -1,10 +1,9 @@
 require 'rails_helper'
-require 'support/attributes'
 require 'support/authentication'
 
 describe "Deleting a user" do 
   xit "destroys the user and redirects to the home page" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 
@@ -21,7 +20,7 @@ describe "Deleting a user" do
   end
 
   it "automatically signs out that user" do
-    user = User.create!(user_attributes)
+    user = FactoryGirl.create(:user)
 
     sign_in(user)
 
