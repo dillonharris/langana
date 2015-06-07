@@ -2,4 +2,37 @@
   <h1>Edit Account</h1>
 </header>
 
-<%= render 'form' %>
+<%= form_for(@user) do |f| %>
+  <%= render "shared/errors", object: @user %>
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, size: 40, autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, size: 40 %>
+      </li>
+      <li class="required">
+        <%= f.label :mobile_number %>
+        <%= f.telephone_field :mobile_number, size: 12 %>
+      </li>
+      <li class="form-group">
+        <%= f.label :profile_picture %>
+        <%= f.file_field :profile_picture %>
+      </li>
+      <li class="required">
+        <%= f.label :password %>
+        <%= f.password_field :password, size: 40 %>
+      </li>
+      <li class="required">
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, size: 40 %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit "Update Account" %>
+    </p>
+  </fieldset>
+<% end %>

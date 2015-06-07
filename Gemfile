@@ -13,6 +13,9 @@ gem 'bcrypt', '~> 3.1.10'
 gem 'pry'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'puma'
+gem 'carrierwave'
+gem 'carrierwave-aws'
+gem 'mini_magick'
 
 group :development do
   gem 'better_errors'
