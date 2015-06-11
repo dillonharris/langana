@@ -36,7 +36,7 @@ describe UsersController do
 
     before do
       @wrong_user = FactoryGirl.create(:user, mobile_number: "0791234567")
-      session[:user_id] = @wrong_user
+      session[:user_id] = @wrong_user.id
     end
 
     it "cannot edit another user" do
