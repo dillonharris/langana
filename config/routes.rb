@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   resources :users do
     resources :work_references
+    member do
+      get :confirm
+    end
   end
 end

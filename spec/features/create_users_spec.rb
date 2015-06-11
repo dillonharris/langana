@@ -16,8 +16,9 @@ describe "Creating a new user" do
 
     click_button 'Create Account'
 
-    expect(current_path).to eq(user_path(User.last))
+    expect(current_path).to eq(confirm_user_path(User.last))
 
+    expect(User.last.confirmed_at).to be_nil
     expect(page).to have_text('Usie')
     expect(page).to have_text('Thanks for signing up!')
     expect(page).not_to have_link('Sign In')

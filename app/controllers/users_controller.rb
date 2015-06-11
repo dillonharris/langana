@@ -21,10 +21,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user, notice: "Thanks for signing up!"
+      redirect_to confirm_user_path(@user), notice: "Thanks for signing up! Please enter the confirmation code sent to your mobile phone"
     else
       render :new
-    end 
+    end
+  end
+
+  def confirm
   end
 
   def edit
