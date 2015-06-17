@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:index, :new, :create]
-  before_action :require_correct_user, only: [:edit, :update, :destroy]
+  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm]
 
   def index
     @users = User.all
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).
-    permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :profile_picture)
+    permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :profile_picture, :mobile_confirmation_token)
   end
 
   def require_correct_user

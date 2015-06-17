@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
+  def mobile_confirmation_token
+  end
+
   def self.authenticate(mobile_number, password)
     user = User.find_by(mobile_number: mobile_number)
     user && user.authenticate(password)
