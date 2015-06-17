@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150611134339) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mobile_confirmation_token_digest"
+    t.string   "mobile_token_salt"
     t.datetime "mobile_confirmation_sent_at"
     t.datetime "confirmed_at"
     t.string   "unconfirmed_mobile_number"
