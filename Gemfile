@@ -16,6 +16,7 @@ gem 'puma'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'mini_magick'
+gem 'sinch_sms'
 
 group :development do
   gem 'better_errors'
