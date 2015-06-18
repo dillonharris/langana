@@ -2,7 +2,7 @@
   <h1>Confirm Phone Number</h1>
 </header>
 
-<%= form_for(@user) do |f| %>
+<%= form_for :user, :url => verify_confirmation_user_path(@user), :html => {:method => :post}  do |f| %>
   <%= render "shared/errors", object: @user %>
   <fieldset>
     <ol>

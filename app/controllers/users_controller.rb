@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:index, :new, :create]
-  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm]
+  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
 
   def index
     @users = User.all
@@ -28,6 +28,15 @@ class UsersController < ApplicationController
   end
 
   def confirm
+  end
+
+  def verify_confirmation
+    submitted_token = params[:user][:mobile_confirmation_token]
+    if BCrypt::Engine.hash_secret(submitted_token, @user.mobile_token_salt) == @user.mobile_confirmation_token_digest
+      redirect_to @user, notice: "Thanks for confirming your mobile number!"
+    else
+      redirect_to confirm_user_path(@user), alert: "Incorrect confirmation token"
+    end
   end
 
   def edit
