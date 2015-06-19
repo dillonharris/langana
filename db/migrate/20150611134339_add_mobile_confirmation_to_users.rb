@@ -5,5 +5,6 @@ class AddMobileConfirmationToUsers < ActiveRecord::Migration
     add_column :users, :mobile_confirmation_sent_at, :datetime
     add_column :users, :confirmed_at, :datetime
     add_column :users, :unconfirmed_mobile_number, :string
+    add_column :users, :confirmation_attempts, :integer, default: 0
   end
 end

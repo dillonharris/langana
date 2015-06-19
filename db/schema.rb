@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150611134339) do
     t.datetime "mobile_confirmation_sent_at"
     t.datetime "confirmed_at"
     t.string   "unconfirmed_mobile_number"
+    t.integer  "confirmation_attempts",            default: 0
   end
 
   add_index "users", ["mobile_number"], name: "index_users_on_mobile_number", unique: true, using: :btree

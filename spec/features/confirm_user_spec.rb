@@ -14,7 +14,6 @@ describe "Confirming a mobile number" do
     click_button "Confirm Mobile Number"
 
     expect(page).to have_text("Thanks for confirming your mobile number!")
-    binding.pry
     expect(user.confirmed_at).not_to be_nil
   end
 
