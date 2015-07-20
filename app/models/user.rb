@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
+  enum role: [:worker, :employer, :vip, :admin]
+
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
@@ -15,6 +17,9 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6, allow_blank: true }
+
+  scope :workers, -> { where(role: "worker")}
+  scope :employers, -> { where(role: "employer")}
 
   def encrypt_mobile_confirmation_token
     if mobile_confirmation_token.present?
