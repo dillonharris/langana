@@ -13,13 +13,14 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
-#                    format: /\A\S+@\S+\z/,
-                    uniqueness: { case_sensitive: false }
+    #                    format: /\A\S+@\S+\z/,
+    uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
-  scope :workers, -> { where(role: "worker")}
-  scope :employers, -> { where(role: "employer")}
+  scope :workers, -> { where("role = ?", 0) }
+  scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
+  scope :employers, -> { where("role = ?", 1) }
 
   def encrypt_mobile_confirmation_token
     if mobile_confirmation_token.present?

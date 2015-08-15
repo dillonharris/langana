@@ -10,7 +10,6 @@ describe "Viewing the list of users" do
     unconfirmed_worker = FactoryGirl.create(:user, role: :worker, first_name: "Unconfirmedworker", mobile_number: "0791239632")
 
     visit users_url
-
     expect(page).to have_link(legit_worker1.first_name)
     expect(page).to have_link(legit_worker2.first_name)
     expect(page).to have_link(legit_worker3.first_name)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Confirming a mobile number" do
 
-  it "confirms with the correct mobile confirmation token" do
+  xit "confirms with the correct mobile confirmation token" do
     user = FactoryGirl.create(:user, mobile_confirmation_token: "abcde")
     expect(user.confirmed_at).to be_nil
 
