@@ -8,6 +8,7 @@ describe "Creating a new user" do
 
     expect(current_path).to eq(signup_path)
 
+    choose 'user_role_worker'
     fill_in "user_first_name",  with: "Usie"
     fill_in "user_last_name", with: "Userson"
     fill_in "user_mobile_number", with: "0792857438"

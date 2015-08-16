@@ -7,8 +7,16 @@
   <fieldset>
     <ol>
       <li class="required">
+        <%= f.label :worker, 'I am looking for work', autofocus: true %>
+        <%= f.radio_button :role, 'worker' %>
+      </li>
+      <li class="required">
+        <%= f.label :employer, 'I am wanting to hire' %>
+        <%= f.radio_button :role, 'employer' %>
+      </li>
+      <li class="required">
         <%= f.label :first_name %>
-        <%= f.text_field :first_name, size: 40, autofocus: true %>
+        <%= f.text_field :first_name, size: 40 %>
       </li>
       <li class="required">
         <%= f.label :last_name %>
