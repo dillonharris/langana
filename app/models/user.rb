@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   before_save :encrypt_mobile_confirmation_token
+  before_validation :format_mobile_number
   attr_accessor :mobile_confirmation_token
   has_secure_password
 
@@ -13,7 +14,9 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
-    #                    format: /\A\S+@\S+\z/,
+    length: { minimum: 12, allow_blank: false },
+    length: { maximum: 12, allow_blank: false },
+                        format: /\+\d{11}\z/,
     uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6, allow_blank: true }
@@ -33,4 +36,13 @@ class User < ActiveRecord::Base
     user = User.find_by(mobile_number: mobile_number)
     user && user.authenticate(password)
   end
+
+  def format_mobile_number
+    if self.mobile_number.present? && self.mobile_number.empty? == false
+      if self.mobile_number[0] == '0' && self.mobile_number.length == 10
+	self.mobile_number = '+27' + self.mobile_number.reverse.chop.reverse
+      end
+    end
+  end
 end
+

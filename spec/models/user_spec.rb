@@ -25,12 +25,11 @@ describe "A user" do
   end
 
   it "accepts properly formatted mobile numbers" do
-    numbers = %w[+27791231234]
+    numbers = %w[+27791231234 0791231234]
     numbers.each do |number|
       user = User.new(mobile_number: number)
 
       user.valid?
-
       expect(user.errors[:mobile_number].any?).to eq(false)
     end
   end
@@ -46,14 +45,12 @@ describe "A user" do
     end
   end
 
-  xit "rejects improperly formatted mobile number" do
-    emails = %w[@ user@ @example.com]
-    emails.each do |email|
-      user = User.new(email: email)
-
+  it "rejects improperly formatted mobile number" do
+    numbers = ["27791231234", "079 123 1234", "0 7 9 1 2 3 1 2 3 4"]
+    numbers.each do |number|
+      user = User.new(mobile_number: number)
       user.valid?
-
-      expect(user.errors[:email].any?).to eq(true)
+      expect(user.errors[:mobile_number].any?).to eq(true)
     end
   end
 
