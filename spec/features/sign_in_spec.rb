@@ -15,25 +15,29 @@ describe "Signing in" do
 
   it "signs in the user if the mobile number/password combination is valid" do
     user = FactoryGirl.create(:user)
-
     visit root_url
-
     click_link 'Sign In'
-
     fill_in "Mobile number", with: user.mobile_number
     fill_in "Password", with: user.password
-
     click_button 'Sign In'
-
     expect(current_path).to eq(user_path(user))
-
     expect(page).to have_text("Welcome back, #{user.first_name}!")
-
     expect(page).to have_link(user.first_name)
     expect(page).not_to have_link('Sign In')
     expect(page).not_to have_link('Sign Up')
     expect(page).to have_link('Account Settings')
     expect(page).to have_link('Sign Out')
+  end
+
+  it "accepts the  mobile number formatted as local" do
+    user = FactoryGirl.create(:user, mobile_number: '+27791231234')
+    visit root_url
+    click_link 'Sign In'
+    fill_in "Mobile number", with: '0791231234'
+    fill_in "Password", with: user.password
+    click_button 'Sign In'
+    expect(current_path).to eq(user_path(user))
+    expect(page).to have_text("Welcome back, #{user.first_name}!")
   end
 
   it "does not sign in the user if the mobile number/password combination is not valid" do
