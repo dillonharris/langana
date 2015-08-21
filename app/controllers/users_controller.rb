@@ -46,6 +46,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def resend_confirmation
+    @user = User.find(params[:id])
+    if @user.confirmed_at
+      redirect_to @user, notice: "Your number is already confirmed"
+    else
+      ConfirmationToken.generate(@user)
+      redirect_to confirm_user_path(@user), notice: "We sent it again! Please enter the confirmation code sent to your mobile phone"
+    end
+  end
+
   def edit
   end
 

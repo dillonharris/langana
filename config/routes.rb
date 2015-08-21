@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get :confirm
       post :verify_confirmation
+      get :resend_confirmation
     end
   end
 end

@@ -14,5 +14,8 @@
     <p>
       <%= f.submit "Confirm Mobile Number" %>
     </p>
+    <p>
+      Didn't receive the SMS? <%= link_to 'Resend verification', resend_confirmation_user_path(@user)  %>
+    </p>
   </fieldset>
 <% end %>
