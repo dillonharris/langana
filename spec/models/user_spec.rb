@@ -25,7 +25,7 @@ describe "A user" do
   end
 
   it "accepts properly formatted mobile numbers" do
-    numbers = %w[+27791231234 0791231234]
+    numbers = %w[+27791231231 0791231232]
     numbers.each do |number|
       user = User.new(mobile_number: number)
 

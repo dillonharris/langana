@@ -19,7 +19,7 @@ describe "Confirming a mobile number" do
   end
 
   it "does not confirm with the incorrect mobile confirmation token" do
-    user = FactoryGirl.create(:user, mobile_confirmation_token: "abcde")
+    user = FactoryGirl.create(:user, mobile_confirmation_token: "abcde", confirmed_at: nil)
     expect(user.confirmed_at).to be_nil
 
     sign_in(user)

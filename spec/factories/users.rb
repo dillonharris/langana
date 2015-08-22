@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :user do
-#    confirmed_at Time.now
+    confirmed_at Time.now
 #    role 'worker'
     first_name "Usie"
     last_name "Userson"
-    mobile_number "0721111111"
+    sequence(:mobile_number, 100000000){ |n| "+27#{n}" }
 #    email "test@example.com"
     password "please123"
 
