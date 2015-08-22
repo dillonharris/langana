@@ -4,11 +4,8 @@ describe "Signing in" do
 
   it "prompts for a mobile number and password" do
     visit root_url
-
     click_link 'Sign In'
-
     expect(current_path).to eq(signin_path)
-
     expect(page).to have_field("Mobile number")
     expect(page).to have_field("Password")
   end
@@ -59,7 +56,7 @@ describe "Signing in" do
     expect(page).not_to have_link('Sign Out')
   end
 
-  it "redirects to the intended page" do
+  it "redirects to the intended page if confirmed" do
     user1 = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user,
                         first_name: "Other",
@@ -76,6 +73,12 @@ describe "Signing in" do
     sign_in(user1)
 
     expect(current_path).to eq(user_path(user2))
+  end
+
+  it "redirects to the confirmation page if not confirmed" do
+    user = FactoryGirl.create(:user, confirmed_at: nil)
+    sign_in(user)
+    expect(current_path).to eq(confirm_user_path(user))
   end
 end
 
