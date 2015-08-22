@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Editing a user" do
-
   it "updates the user and shows the user's updated details" do
     user = FactoryGirl.create(:user)
     sign_in(user)
@@ -30,16 +29,11 @@ describe "Editing a user" do
 
   it "does not update the user if it's invalid" do
     user = FactoryGirl.create(:user)
-
     sign_in(user)
-
     visit edit_user_url(user)
-
     fill_in 'user_first_name', with: " "
-
     click_button "Update Account"
-
     expect(page).to have_text('error')
   end
-
 end
+

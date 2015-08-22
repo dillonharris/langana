@@ -19,6 +19,8 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: "You are signed out"
   end
 
+  private
+
   def url_after_signin(user)
     if user.confirmed_at
       session[:intended_url] || user
