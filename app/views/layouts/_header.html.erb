@@ -5,6 +5,7 @@
       <p>
         <% if current_user %>
           <%= link_to current_user.first_name, current_user %>
+	  <%= link_to 'Confirm phone number', confirm_user_path(current_user), class: 'button' unless current_user.confirmed_at %>
           <%= link_to 'Account Settings', edit_user_path(current_user), class: 'button' %>
           <%= link_to 'Sign Out', session_path, method: :delete, class: 'button' %>
         <% else %>
