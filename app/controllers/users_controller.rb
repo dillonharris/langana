@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_signin, except: [:index, :new, :create]
+  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password]
   before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
 
   def index
@@ -57,6 +57,21 @@ class UsersController < ApplicationController
       ConfirmationToken.generate(@user)
       redirect_to confirm_user_path(@user), notice: "We sent it again! Please enter the confirmation code sent to your mobile phone"
     end
+  end
+
+  def forgot_password
+  end
+
+  def send_reset_code
+    if @user = User.find_by(mobile_number: params[:mobile_number])
+      redirect_to reset_password_user_path(@user)
+    else
+      redirect_to forgot_password_path, alert: "No account with that phone number"
+    end
+  end
+
+  def reset_password
+    @user = User.find(params[:id])
   end
 
   def edit
