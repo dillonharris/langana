@@ -64,7 +64,14 @@ class UsersController < ApplicationController
 
   def send_reset_code
     if @user = User.find_by(mobile_number: params[:mobile_number])
-      redirect_to new_password_user_path(@user)
+      if @user.verification_tokens_sent > 9
+	redirect_to signin_path, alert: "Too many attempts for today, please try again tomorrow"
+      else
+	@user.verification_tokens_sent += 1
+	@user.save
+	ConfirmationToken.generate(@user)
+	redirect_to new_password_user_path(@user)
+      end
     else
       redirect_to forgot_password_path, alert: "No account with that phone number"
     end
