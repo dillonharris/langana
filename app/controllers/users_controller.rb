@@ -9,8 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-#    @reviews_given = @user.reviews_given
-#    @favorite_movies = @user.favorite_movies
+    redirect_to(confirm_user_path(current_user)) unless current_user.confirmed_at or current_user?(@user)
   end
 
   def new
