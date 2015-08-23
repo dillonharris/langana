@@ -64,16 +64,19 @@ class UsersController < ApplicationController
 
   def send_reset_code
     if @user = User.find_by(mobile_number: params[:mobile_number])
-      redirect_to reset_password_user_path(@user)
+      redirect_to new_password_user_path(@user)
     else
       redirect_to forgot_password_path, alert: "No account with that phone number"
     end
   end
 
-  def reset_password
+  def new_password
     @user = User.find(params[:id])
   end
-
+=begin
+  def reset_password
+  end
+=end
   def edit
   end
 
@@ -95,7 +98,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).
-    permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :profile_picture, :role)
+      permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :profile_picture, :role)
   end
 
   def require_correct_user

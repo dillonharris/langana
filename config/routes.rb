@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :work_references
     member do
-      get :reset_password
+      get :new_password
       get :confirm
       post :verify_confirmation
       get :resend_confirmation
