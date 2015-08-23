@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :work_references
     member do
       get :new_password
+      patch :reset_password
       get :confirm
       post :verify_confirmation
       get :resend_confirmation

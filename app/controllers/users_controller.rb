@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password]
+  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
   before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
 
   def index
@@ -73,10 +73,23 @@ class UsersController < ApplicationController
   def new_password
     @user = User.find(params[:id])
   end
-=begin
+
   def reset_password
+    @user = User.find(params[:id])
+    submitted_token = params[:user][:mobile_confirmation_token]
+    @user.confirmation_attempts += 1
+    @user.save
+    if @user.confirmation_attempts > 9
+      redirect_to forgot_password_path, alert: "You have typed in the wrong code too many times, please try again tomorrow"
+    elsif BCrypt::Engine.hash_secret(submitted_token, @user.mobile_token_salt) == @user.mobile_confirmation_token_digest
+      @user.update(user_params)
+      session[:user_id] = @user.id
+      redirect_to @user, notice: "Password reset successful!"
+    else
+      redirect_to new_password_user_path(@user), alert: "Incorrect confirmation token"
+    end
   end
-=end
+
   def edit
   end
 
