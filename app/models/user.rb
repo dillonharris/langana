@@ -33,22 +33,13 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(mobile_number, password)
-    mobile_number = format_mobile(mobile_number)
+    mobile_number = ApplicationHelper.format_mobile(mobile_number)
     user = User.find_by(mobile_number: mobile_number)
     user && user.authenticate(password)
   end
 
   def format_mobile_number
-    self.mobile_number = self.class.format_mobile(self.mobile_number)
-  end
-
-  def self.format_mobile(number)
-    if number && number.empty? == false
-      if number[0] == '0' && number.length == 10
-        number = '+27' + number.reverse.chop.reverse
-      end
-    end
-    number
+    self.mobile_number = ApplicationHelper.format_mobile(self.mobile_number)
   end
 end
 
