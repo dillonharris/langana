@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 20150821203325) do
     t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "mobile_confirmation_token_digest"
-    t.string   "mobile_token_salt"
+    t.string   "mobile_confirmation_code_digest"
+    t.string   "mobile_code_salt"
     t.datetime "mobile_confirmation_sent_at"
     t.datetime "confirmed_at"
     t.string   "unconfirmed_mobile_number"
-    t.integer  "confirmation_attempts",            default: 0
-    t.integer  "verification_tokens_sent",         default: 0
+    t.integer  "confirmation_attempts",           default: 0
+    t.integer  "verification_codes_sent",         default: 0
   end
 
   add_index "users", ["mobile_number"], name: "index_users_on_mobile_number", unique: true, using: :btree

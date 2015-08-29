@@ -10,12 +10,12 @@ describe "Resetting a user's password" do
   end
 
   it "takes a mobile number & sends a reset code if it's found in the databse" do
-    user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_token: "abcde")
+    user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_code: "abcde")
     visit forgot_password_path
     fill_in "Mobile number", with: user.mobile_number
     click_button "Reset password"
     expect(current_path).to eq(new_password_user_path(user))
-    fill_in "Mobile confirmation token", with: "abcde"
+    fill_in "Mobile confirmation code", with: "abcde"
     fill_in "user_password", with: "sdfsdf"
     fill_in "user_password_confirmation", with: "sdfsdf"
     click_button "Change Password"
@@ -33,21 +33,21 @@ describe "Resetting a user's password" do
   end
 
   it "only accepts the reset code one time" do
-    user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_token: "abcde")
+    user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_code: "abcde")
     visit forgot_password_path
     fill_in "Mobile number", with: user.mobile_number
     click_button "Reset password"
     expect(current_path).to eq(new_password_user_path(user))
-    fill_in "Mobile confirmation token", with: "abcde"
+    fill_in "Mobile confirmation code", with: "abcde"
     fill_in "user_password", with: "sdfsdf"
     fill_in "user_password_confirmation", with: "sdfsdf"
     click_button "Change Password"
     visit new_password_user_path(user)
-    fill_in "Mobile confirmation token", with: "abcde"
+    fill_in "Mobile confirmation code", with: "abcde"
     fill_in "user_password", with: "sdfsdf"
     fill_in "user_password_confirmation", with: "sdfsdf"
     click_button "Change Password"
-    expect(page).to have_text("Incorrect confirmation token")
+    expect(page).to have_text("Incorrect confirmation code")
     # This spec passed before the feature was implemented, I need help
   end
 end

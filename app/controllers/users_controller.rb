@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      ConfirmationToken.generate(@user)
+      ConfirmationCode.generate(@user)
       redirect_to confirm_user_path(@user), notice: "Thanks for signing up! Please enter the confirmation code sent to your mobile phone"
     else
       render :new
@@ -31,17 +31,17 @@ class UsersController < ApplicationController
   end
 
   def verify_confirmation
-    submitted_token = params[:user][:mobile_confirmation_token]
+    submitted_code = params[:user][:mobile_confirmation_code]
     @user.confirmation_attempts += 1
     @user.save
     if @user.confirmation_attempts > 9
       redirect_to confirm_user_path(@user), alert: "You have typed in the wrong code too many times, please try again tomorrow"
-    elsif BCrypt::Engine.hash_secret(submitted_token, @user.mobile_token_salt) == @user.mobile_confirmation_token_digest
+    elsif BCrypt::Engine.hash_secret(submitted_code, @user.mobile_code_salt) == @user.mobile_confirmation_code_digest
       @user.confirmed_at = Time.now
       @user.save
       redirect_to @user, notice: "Thanks for confirming your mobile number!"
     else
-      redirect_to confirm_user_path(@user), alert: "Incorrect confirmation token"
+      redirect_to confirm_user_path(@user), alert: "Incorrect confirmation code"
     end
   end
 
@@ -49,12 +49,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.confirmed_at
       redirect_to @user, notice: "Your number is already confirmed"
-    elsif @user.verification_tokens_sent > 9
+    elsif @user.verification_codes_sent > 9
       redirect_to @user, alert: "You have requested too many codes, please try again tomorrow"
     else
-      @user.verification_tokens_sent += 1
+      @user.verification_codes_sent += 1
       @user.save
-      ConfirmationToken.generate(@user)
+      ConfirmationCode.generate(@user)
       redirect_to confirm_user_path(@user), notice: "We sent it again! Please enter the confirmation code sent to your mobile phone"
     end
   end
@@ -64,12 +64,12 @@ class UsersController < ApplicationController
 
   def send_reset_code
     if @user = User.find_by(mobile_number: ApplicationHelper.format_mobile(params[:mobile_number]))
-      if @user.verification_tokens_sent > 9
+      if @user.verification_codes_sent > 9
         redirect_to signin_path, alert: "Too many attempts for today, please try again tomorrow"
       else
-        @user.verification_tokens_sent += 1
+        @user.verification_codes_sent += 1
         @user.save
-        ConfirmationToken.generate(@user)
+        ConfirmationCode.generate(@user)
         redirect_to new_password_user_path(@user)
       end
     else
@@ -83,19 +83,19 @@ class UsersController < ApplicationController
 
   def reset_password
     @user = User.find(params[:id])
-    submitted_token = params[:user][:mobile_confirmation_token]
+    submitted_code = params[:user][:mobile_confirmation_code]
     @user.confirmation_attempts += 1
     @user.save
     if @user.confirmation_attempts > 9
       redirect_to forgot_password_path, alert: "You have typed in the wrong code too many times, please try again tomorrow"
-    elsif BCrypt::Engine.hash_secret(submitted_token, @user.mobile_token_salt) == @user.mobile_confirmation_token_digest
+    elsif BCrypt::Engine.hash_secret(submitted_code, @user.mobile_code_salt) == @user.mobile_confirmation_code_digest
       @user.update(user_params)
-      @user.mobile_confirmation_token_digest = ''
+      @user.mobile_confirmation_code_digest = ''
       @user.save
       session[:user_id] = @user.id
       redirect_to @user, notice: "Password reset successful!"
     else
-      redirect_to new_password_user_path(@user), alert: "Incorrect confirmation token"
+      redirect_to new_password_user_path(@user), alert: "Incorrect confirmation code"
     end
   end
 

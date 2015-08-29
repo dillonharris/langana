@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :confirmation_token do
+  factory :confirmation_code do
     
   end
 

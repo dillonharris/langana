@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  before_save :encrypt_mobile_confirmation_token
+  before_save :encrypt_mobile_confirmation_code
   before_validation :format_mobile_number
-  attr_accessor :mobile_confirmation_token
+  attr_accessor :mobile_confirmation_code
   has_secure_password
 
   has_many :work_references_received, class_name: "WorkReference", foreign_key: :worker_user_id
@@ -25,10 +25,10 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
   scope :employers, -> { where("role = ?", 1) }
 
-  def encrypt_mobile_confirmation_token
-    if mobile_confirmation_token.present?
-      self.mobile_token_salt = BCrypt::Engine.generate_salt
-      self.mobile_confirmation_token_digest = BCrypt::Engine.hash_secret(mobile_confirmation_token, mobile_token_salt)
+  def encrypt_mobile_confirmation_code
+    if mobile_confirmation_code.present?
+      self.mobile_code_salt = BCrypt::Engine.generate_salt
+      self.mobile_confirmation_code_digest = BCrypt::Engine.hash_secret(mobile_confirmation_code, mobile_code_salt)
     end
   end
 
