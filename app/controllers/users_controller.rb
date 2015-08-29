@@ -65,12 +65,12 @@ class UsersController < ApplicationController
   def send_reset_code
     if @user = User.find_by(mobile_number: ApplicationHelper.format_mobile(params[:mobile_number]))
       if @user.verification_tokens_sent > 9
-	redirect_to signin_path, alert: "Too many attempts for today, please try again tomorrow"
+        redirect_to signin_path, alert: "Too many attempts for today, please try again tomorrow"
       else
-	@user.verification_tokens_sent += 1
-	@user.save
-	ConfirmationToken.generate(@user)
-	redirect_to new_password_user_path(@user)
+        @user.verification_tokens_sent += 1
+        @user.save
+        ConfirmationToken.generate(@user)
+        redirect_to new_password_user_path(@user)
       end
     else
       redirect_to forgot_password_path, alert: "No account with that phone number"
@@ -90,6 +90,8 @@ class UsersController < ApplicationController
       redirect_to forgot_password_path, alert: "You have typed in the wrong code too many times, please try again tomorrow"
     elsif BCrypt::Engine.hash_secret(submitted_token, @user.mobile_token_salt) == @user.mobile_confirmation_token_digest
       @user.update(user_params)
+      @user.mobile_confirmation_token_digest = ''
+      @user.save
       session[:user_id] = @user.id
       redirect_to @user, notice: "Password reset successful!"
     else

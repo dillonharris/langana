@@ -31,4 +31,23 @@ describe "Resetting a user's password" do
     expect(current_path).to eq(forgot_password_path)
     expect(page).to have_text("No account with that phone number")
   end
+
+  it "only accepts the reset code one time" do
+    user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_token: "abcde")
+    visit forgot_password_path
+    fill_in "Mobile number", with: user.mobile_number
+    click_button "Reset password"
+    expect(current_path).to eq(new_password_user_path(user))
+    fill_in "Mobile confirmation token", with: "abcde"
+    fill_in "user_password", with: "sdfsdf"
+    fill_in "user_password_confirmation", with: "sdfsdf"
+    click_button "Change Password"
+    visit new_password_user_path(user)
+    fill_in "Mobile confirmation token", with: "abcde"
+    fill_in "user_password", with: "sdfsdf"
+    fill_in "user_password_confirmation", with: "sdfsdf"
+    click_button "Change Password"
+    expect(page).to have_text("Incorrect confirmation token")
+    # This spec passed before the feature was implemented, I need help
+  end
 end
