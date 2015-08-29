@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def send_reset_code
-    if @user = User.find_by(mobile_number: params[:mobile_number])
+    if @user = User.find_by(mobile_number: ApplicationHelper.format_mobile(params[:mobile_number]))
       if @user.verification_tokens_sent > 9
 	redirect_to signin_path, alert: "Too many attempts for today, please try again tomorrow"
       else
