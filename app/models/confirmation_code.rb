@@ -2,7 +2,7 @@ class ConfirmationCode
   def self.generate(user)
     code = random_code
     user.mobile_confirmation_code = code
-    SinchSms.send(ENV.fetch('SINCH_KEY'), ENV["SINCH_SECRET"], "Your code is #{code}", user.mobile_number)
+    SinchSms.send(ENV.fetch('SINCH_KEY'), ENV["SINCH_SECRET"], "Thanks for using Langana. Your code is #{code}", user.mobile_number)
     user.mobile_confirmation_sent_at = Time.now
     user.confirmation_attempts = 0
     user.save
