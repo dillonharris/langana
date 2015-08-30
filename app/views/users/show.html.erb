@@ -4,6 +4,7 @@
     <h1><%= @user.first_name %></h1>
     <h2><%= mail_to(@user.email) %></h2>
     <h2><%= @user.role.capitalize if @user.role %></h2>
+    <h2><%= @user.mobile_number if @user.mobile_number %></h2>
   </header>
 
   <footer>
