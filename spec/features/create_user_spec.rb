@@ -14,6 +14,7 @@ describe "Creating a new user" do
     fill_in "user_mobile_number", with: "0792857438"
     fill_in "user_password", with: "secret"
     fill_in "user_password_confirmation", with: "secret"
+    select "Builder", from: "field"
 
     click_button 'Create Account'
 
@@ -21,6 +22,7 @@ describe "Creating a new user" do
 
     expect(User.last.confirmed_at).to be_nil
     expect(page).to have_text('Usie')
+    expect(page).to have_text('Builder')
     expect(page).to have_text('Thanks for signing up!')
     expect(page).not_to have_link('Sign In')
     expect(page).not_to have_link('Sign Up')
