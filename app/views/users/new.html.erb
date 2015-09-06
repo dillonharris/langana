@@ -27,6 +27,11 @@
         <%= f.telephone_field :mobile_number, size: 12 %>
       </li>
       <li class="required">
+        <%= f.label :service %>
+        <%= f.select :service, User::SERVICES.sort, prompt: "Pick one" %>
+      </li>
+
+      <li class="required">
         <%= f.label :password %>
         <%= f.password_field :password, size: 40 %>
       </li>
