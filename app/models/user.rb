@@ -21,6 +21,19 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
+  SERVICES = [
+    'Gardening',
+    'Domestic',
+    'Nannying',
+    'Labour',
+    'Painting',
+    'Carpentry',
+    'Building',
+    'Plumbing',
+    'Electrical',
+    'Pet care',
+    'Home care']
+
   scope :workers, -> { where("role = ?", 0) }
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
   scope :employers, -> { where("role = ?", 1) }

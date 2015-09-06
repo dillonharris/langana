@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821203325) do
+ActiveRecord::Schema.define(version: 20150906200411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 20150821203325) do
     t.string   "unconfirmed_mobile_number"
     t.integer  "confirmation_attempts",           default: 0
     t.integer  "verification_codes_sent",         default: 0
+    t.string   "gender"
+    t.string   "service"
+    t.string   "home_languange"
+    t.string   "second_language"
+    t.string   "third_language"
+    t.string   "id_or_passport_number"
+    t.string   "id_or_passport_image"
+    t.string   "valid_work_permit"
+    t.string   "street_address"
+    t.string   "unit"
+    t.string   "suburb"
+    t.string   "city"
+    t.string   "province"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "drivers_license"
   end
 
   add_index "users", ["mobile_number"], name: "index_users_on_mobile_number", unique: true, using: :btree

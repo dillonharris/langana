@@ -14,12 +14,11 @@ describe "Creating a new user" do
     fill_in "user_mobile_number", with: "0792857438"
     fill_in "user_password", with: "secret"
     fill_in "user_password_confirmation", with: "secret"
-    select "Builder", from: "field"
+    select "Building", from: "Service"
 
     click_button 'Create Account'
 
     expect(current_path).to eq(confirm_user_path(User.last))
-
     expect(User.last.confirmed_at).to be_nil
     expect(page).to have_text('Usie')
     expect(page).to have_text('Builder')
