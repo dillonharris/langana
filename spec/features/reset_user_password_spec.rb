@@ -10,6 +10,7 @@ describe "Resetting a user's password" do
   end
 
   it "takes a mobile number & sends a reset code if it's found in the databse" do
+    allow(ConfirmationCode).to receive(:random_code).and_return("abcde")
     user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_code: "abcde")
     visit forgot_password_path
     fill_in "Mobile number", with: user.mobile_number
@@ -20,8 +21,8 @@ describe "Resetting a user's password" do
     fill_in "user_password_confirmation", with: "sdfsdf"
     click_button "Change Password"
     # everything works but this next line fails, I need help
-    # expect(current_path).to eq(user_path(user))
-    # expect(page).to have_text("Password reset successfully")
+    expect(current_path).to eq(user_path(user))
+    expect(page).to have_text("Password reset successful")
   end
 
   it "takes a mobile number & notifies the user if it's not found in the databse" do

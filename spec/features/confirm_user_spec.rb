@@ -2,15 +2,15 @@ require 'rails_helper'
 
 describe "Confirming a mobile number" do
 
-  xit "confirms with the correct mobile confirmation code" do
-    user = FactoryGirl.create(:user, mobile_confirmation_code: "abcde")
+  it "confirms with the correct mobile confirmation code" do
+    user = FactoryGirl.create(:user, mobile_confirmation_code: "abcde", confirmed_at: nil)
     expect(user.confirmed_at).to be_nil
     sign_in(user)
     visit confirm_user_path(user)
     fill_in "Mobile confirmation code", with: "abcde"
     click_button "Confirm Mobile Number"
     expect(page).to have_text("Thanks for confirming your mobile number!")
-    # The code is working as expected but this next line fails, I need help
+    user.reload
     expect(user.confirmed_at).not_to be_nil
   end
 
