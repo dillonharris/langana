@@ -25,11 +25,12 @@ describe "Confirming a mobile number" do
     expect(user.confirmed_at).to be_nil
   end
 
-  xit "resends verification code when the user requests it" do
-    user = FactoryGirl.create(:user, mobile_confirmation_code: "abcde")
+  it "resends verification code when the user requests it" do
+    user = FactoryGirl.create(:user, mobile_confirmation_code: "abcde", confirmed_at: nil)
     expect(user.confirmed_at).to be_nil
     sign_in(user)
     visit confirm_user_path(user)
+    save_and_open_page
     # This next line fails even though the notice appears in browser, I need help
     expect(page).to have_text("We sent it again")
   end
