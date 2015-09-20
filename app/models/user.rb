@@ -14,8 +14,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
-    length: { minimum: 12, allow_blank: false },
-    length: { maximum: 12, allow_blank: false },
+    length: { minimum: 12, maximum: 12, allow_blank: false },
                         format: /\+\d{11}\z/,
     uniqueness: { case_sensitive: false }
 
