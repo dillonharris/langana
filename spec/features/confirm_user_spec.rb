@@ -30,8 +30,7 @@ describe "Confirming a mobile number" do
     expect(user.confirmed_at).to be_nil
     sign_in(user)
     visit confirm_user_path(user)
-    save_and_open_page
-    # This next line fails even though the notice appears in browser, I need help
+    click_link "Resend verification"
     expect(page).to have_text("We sent it again")
   end
 
