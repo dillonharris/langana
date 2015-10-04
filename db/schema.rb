@@ -33,14 +33,16 @@ ActiveRecord::Schema.define(version: 20150906200411) do
     t.string   "unconfirmed_mobile_number"
     t.integer  "confirmation_attempts",           default: 0
     t.integer  "verification_codes_sent",         default: 0
-    t.string   "gender"
+    t.integer  "gender"
     t.string   "service"
-    t.string   "home_languange"
+    t.string   "home_language"
     t.string   "second_language"
     t.string   "third_language"
     t.string   "id_or_passport_number"
     t.string   "id_or_passport_image"
-    t.string   "valid_work_permit"
+    t.string   "nationality"
+    t.string   "work_permit_status"
+    t.string   "work_permit_image"
     t.string   "street_address"
     t.string   "unit"
     t.string   "suburb"
@@ -48,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150906200411) do
     t.string   "province"
     t.string   "postal_code"
     t.string   "country"
-    t.string   "drivers_license"
+    t.boolean  "drivers_license"
   end
 
   add_index "users", ["mobile_number"], name: "index_users_on_mobile_number", unique: true, using: :btree

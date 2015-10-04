@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   mount_uploader :profile_picture, ProfilePictureUploader
 
   enum role: [:worker, :employer, :vip, :admin]
+  enum gender: [:male, :female]
 
   validates_presence_of :first_name, :last_name, :mobile_number
 
@@ -31,7 +32,14 @@ class User < ActiveRecord::Base
     'Plumbing',
     'Electrical',
     'Pet care',
-    'Home care']
+    'Home care'
+  ]
+
+  WORK_PERMIT_STATUSES = [
+    'South African',
+    'Foreigner with work permit',
+    'Foreigner without work permit'
+  ]
 
   scope :workers, -> { where("role = ?", 0) }
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
