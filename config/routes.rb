@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'forgot_password' => 'users#forgot_password'
   post 'forgot_password' => 'users#send_reset_code'
 
-  get 'signup' => 'users#new'
+  get 'signup_worker' => 'users#new_worker'
+  get 'signup_employer' => 'users#new_employer'
+  get 'choose_role' => 'visitors#choose_role'
   resources :users do
     resources :work_references
     member do

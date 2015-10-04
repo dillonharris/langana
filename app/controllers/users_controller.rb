@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
+  before_action :require_signin, except: [:index, :new_worker, :new_employer, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
   before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
 
   def index
@@ -12,8 +12,14 @@ class UsersController < ApplicationController
     redirect_to(confirm_user_path(current_user)) unless current_user.confirmed_at or current_user?(@user)
   end
 
-  def new
+  def new_worker
     @user = User.new
+    @user.role = 'worker'
+  end
+
+  def new_employer
+    @user = User.new
+    @user.role = 'employer'
   end
 
   def create
@@ -22,8 +28,12 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       ConfirmationCode.generate(@user)
       redirect_to confirm_user_path(@user), notice: "Thanks for signing up! Please enter the confirmation code sent to your mobile phone"
+    elsif @user.role == 'worker'
+      render :new_worker
+    elsif @user.role == 'employer'
+      render :new_employer
     else
-      render :new
+      redirect_to choose_role_path
     end
   end
 
