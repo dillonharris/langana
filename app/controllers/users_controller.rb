@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   def new_worker
     @user = User.new
     @user.role = 'worker'
+    @user.city = 'Cape Town'
+    @user.country = 'South Africa'
   end
 
   def new_employer

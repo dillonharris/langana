@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
+  # with_options if: role == :worker do |worker|
+  #   worker.validates_presence_of :service
+  # end
+
   SERVICES = [
     'Gardening',
     'Domestic',
@@ -32,7 +36,8 @@ class User < ActiveRecord::Base
     'Plumbing',
     'Electrical',
     'Pet care',
-    'Home care'
+    'Home care',
+    'Other'
   ]
 
   WORK_PERMIT_STATUSES = [
@@ -40,6 +45,9 @@ class User < ActiveRecord::Base
     'Foreigner with work permit',
     'Foreigner without work permit'
   ]
+
+  CITIES = [
+    'Cape Town']
 
   scope :workers, -> { where("role = ?", 0) }
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }

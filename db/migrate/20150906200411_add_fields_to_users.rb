@@ -7,7 +7,7 @@ class AddFieldsToUsers < ActiveRecord::Migration
     add_column :users, :third_language, :string
     add_column :users, :id_or_passport_number, :string
     add_column :users, :id_or_passport_image, :string
-    add_column :users, :nationality, :string
+    add_column :users, :country_of_citizenship, :string
     add_column :users, :work_permit_status, :string
     add_column :users, :work_permit_image, :string
     add_column :users, :street_address, :string

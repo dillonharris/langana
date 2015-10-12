@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150906200411) do
     t.string   "third_language"
     t.string   "id_or_passport_number"
     t.string   "id_or_passport_image"
-    t.string   "nationality"
+    t.string   "country_of_citizenship"
     t.string   "work_permit_status"
     t.string   "work_permit_image"
     t.string   "street_address"

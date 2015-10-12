@@ -20,7 +20,6 @@ describe "Resetting a user's password" do
     fill_in "user_password", with: "sdfsdf"
     fill_in "user_password_confirmation", with: "sdfsdf"
     click_button "Change Password"
-    # everything works but this next line fails, I need help
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("Password reset successful")
   end

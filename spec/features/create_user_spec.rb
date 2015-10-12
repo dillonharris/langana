@@ -10,14 +10,17 @@ describe "Creating a new user" do
     click_link 'I am looking for work'
 
     expect(current_path).to eq(signup_worker_path)
-
-#    choose 'user_role_worker'
     fill_in "user_first_name",  with: "Workie"
     fill_in "user_last_name", with: "Workerson"
     fill_in "user_mobile_number", with: "0792857438"
     fill_in "user_password", with: "secret"
     fill_in "user_password_confirmation", with: "secret"
     select "Building", from: "Service"
+    fill_in "Home language", with: "English"
+    fill_in "Id or passport number", with: "0305684795"
+    fill_in "Country of citizenship", with: "South Africa"
+    fill_in "City", with: "Cape Town"
+
     click_button 'Create Account'
 
     expect(current_path).to eq(confirm_user_path(User.last))
