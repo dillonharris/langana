@@ -17,6 +17,6 @@ class AddFieldsToUsers < ActiveRecord::Migration
     add_column :users, :province, :string
     add_column :users, :postal_code, :string
     add_column :users, :country, :string
-    add_column :users, :drivers_license, :boolean
+    add_column :users, :drivers_license, :string
   end
 end

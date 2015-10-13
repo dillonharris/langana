@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150906200411) do
     t.string   "province"
     t.string   "postal_code"
     t.string   "country"
-    t.boolean  "drivers_license"
+    t.string   "drivers_license"
   end
 
   add_index "users", ["mobile_number"], name: "index_users_on_mobile_number", unique: true, using: :btree
