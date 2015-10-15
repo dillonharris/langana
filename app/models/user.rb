@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   ]
 
   WORK_PERMIT_STATUSES = [
-    'South African',
+    'South African Citizen',
     'Foreigner with work permit',
     'Foreigner without work permit'
   ]

@@ -17,33 +17,37 @@ describe "Creating a new user" do
     fill_in "user_password_confirmation", with: "secret"
     select "Building", from: "Service"
     fill_in "Home language", with: "English"
+    fill_in "Second language", with: "Afrikaans"
+    fill_in "Third language", with: "Xhosa"
     fill_in "Id or passport number", with: "0305684795"
     fill_in "Country of citizenship", with: "South Africa"
-    fill_in "City", with: "Cape Town"
+    select "Cape Town", from: "City"
+    fill_in "Work permit status", with: "South African Citizen"
+    select "South African Citizen", from: "Work permit status"
 
     click_button 'Create Account'
 
     expect(current_path).to eq(confirm_user_path(User.last))
     expect(page).to have_text('Thanks for signing up!')
     expect(User.last.confirmed_at).to be_nil
-    expect(User.last.first_name).to eq('worker')
-    expect(User.last.last_name).to eq('worker')
-    expect(User.last.mobile_number).to eq('worker')
-    expect(User.last.service).to eq('worker')
-    expect(User.last.home_language).to eq('worker')
-    expect(User.last.second_language).to eq('worker')
-    expect(User.last.third_language).to eq('worker')
-    expect(User.last.id_or_passport_number).to eq('worker')
-    expect(User.last.country_of_citizenship).to eq('worker')
-    expect(User.last.work_permit_status).to eq('worker')
-    expect(User.last.street_address).to eq('worker')
-    expect(User.last.unit).to eq('worker')
-    expect(User.last.suburb).to eq('worker')
-    expect(User.last.city).to eq('worker')
-    expect(User.last.province).to eq('worker')
-    expect(User.last.postal_code).to eq('worker')
-    expect(User.last.country).to eq('worker')
-    expect(User.last.drivers_license).to eq('worker')
+    expect(User.last.first_name).to eq('Workie')
+    expect(User.last.last_name).to eq('Workerson')
+    expect(User.last.mobile_number).to eq('+27792857438')
+    expect(User.last.service).to eq('Building')
+    expect(User.last.home_language).to eq('English')
+    expect(User.last.second_language).to eq('Afrikaans')
+    expect(User.last.third_language).to eq('Xhosa')
+    expect(User.last.id_or_passport_number).to eq('0305684795')
+    expect(User.last.country_of_citizenship).to eq('South Africa')
+    expect(User.last.work_permit_status).to eq('South African Citizen')
+    # expect(User.last.street_address).to eq('worker')
+    # expect(User.last.unit).to eq('worker')
+    # expect(User.last.suburb).to eq('worker')
+    # expect(User.last.city).to eq('worker')
+    # expect(User.last.province).to eq('worker')
+    # expect(User.last.postal_code).to eq('worker')
+    # expect(User.last.country).to eq('worker')
+    # expect(User.last.drivers_license).to eq('worker')
     expect(User.last.role).to eq('worker')
     visit user_path((User.last))
     expect(page).to have_text('Workie')

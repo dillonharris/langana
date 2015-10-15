@@ -44,6 +44,10 @@
         <%= f.text_field :third_language, size: 40 %>
       </li>
       <li class="required">
+        <%= f.label :work_permit_status %>
+        <%= f.select :work_permit_status, User::WORK_PERMIT_STATUSES.sort, prompt: "Pick one" %>
+      </li>
+      <li class="required">
         <%= f.label :id_or_passport_number %>
         <%= f.text_field :id_or_passport_number, size: 40 %>
       </li>
@@ -69,7 +73,7 @@
       </li>
       <li class="required">
         <%= f.label :city %>
-        <%= f.text_field :city, size: 40 %>
+        <%= f.select :city, User::CITIES.sort, prompt: "Pick one" %>
       </li>
       <li class="required">
         <%= f.label :province %>

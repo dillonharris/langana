@@ -131,8 +131,25 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).
-      permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :profile_picture, :role, :service)
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :mobile_number,
+      :email,
+      :password,
+      :password_confirmation,
+      :profile_picture,
+      :role,
+      :service,
+      :home_language,
+      :id_or_passport_number,
+      :country_of_citizenship,
+      :first_language,
+      :second_language,
+      :third_language,
+      :work_permit_status
+
+    )
   end
 
   def require_correct_user
