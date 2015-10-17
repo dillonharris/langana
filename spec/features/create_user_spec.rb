@@ -22,7 +22,6 @@ describe "Creating a new user" do
     fill_in "Id or passport number", with: "0305684795"
     fill_in "Country of citizenship", with: "South Africa"
     select "Cape Town", from: "City"
-    fill_in "Work permit status", with: "South African Citizen"
     select "South African Citizen", from: "Work permit status"
 
     click_button 'Create Account'
