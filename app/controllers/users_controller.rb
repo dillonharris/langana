@@ -141,6 +141,12 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_worker
+  end
+
+  def edit_employer
+  end
+
   def update
     if @user.update(user_params)
       redirect_to @user, notice: "Account successfully updated!"

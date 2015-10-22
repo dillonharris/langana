@@ -1,17 +1,33 @@
 require 'rails_helper'
 
 describe "Editing a user" do
-  it "updates the user and shows the user's updated details" do
-    user = FactoryGirl.create(:user)
+  it "updates an employer user and shows the user's updated details" do
+    user = FactoryGirl.create(:user, role: 'employer')
     sign_in(user)
     visit user_url(user)
     click_link 'Edit Account'
-    expect(current_path).to eq(edit_user_path(user))
+    expect(current_path).to eq(edit_employer_user_path(user))
     expect(find_field('user_first_name').value).to eq(user.first_name)
-    fill_in "First name", with: "Updated User First name"
     click_button "Update Account"
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("Updated User First name")
+    expect(page).to have_text('Account successfully updated!')
+  end
+
+  it "updates a worker user and shows the user's updated details" do
+    user = FactoryGirl.create(:user,
+      role: 'worker',
+      home_language: 'English'
+    )
+    sign_in(user)
+    visit user_url(user)
+    click_link 'Edit Account'
+    expect(current_path).to eq(edit_worker_user_path(user))
+    expect(find_field('user_home_language').value).to eq(user.home_language)
+    fill_in "Home language", with: "Updated User Home Language"
+    click_button "Update Account"
+    expect(current_path).to eq(user_path(user))
+    expect(page).to have_text("Updated User Home Language")
     expect(page).to have_text('Account successfully updated!')
   end
 
