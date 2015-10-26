@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       get :resend_confirmation
     end
   end
+
+  get "users/filter/:scope" => "users#index", as: :filtered_users
 end

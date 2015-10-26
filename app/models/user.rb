@@ -52,6 +52,18 @@ class User < ActiveRecord::Base
   scope :workers, -> { where("role = ?", 0) }
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
   scope :employers, -> { where("role = ?", 1) }
+  scope :gardening, -> { where(service: "Gardening") }
+  scope :domestic, -> { where(service: "Domestic") }
+  scope :nannying, -> { where(service: "Nannying") }
+  scope :labour, -> { where(service: "Labour") }
+  scope :painting, -> { where(service: "Painting") }
+  scope :carpentry, -> { where(service: "Carpentry") }
+  scope :building, -> { where(service: "Building") }
+  scope :plumbing, -> { where(service: "Plumbing") }
+  scope :electrical, -> { where(service: "Electrical") }
+  scope :pet_care, -> { where(service: "Pet care") }
+  scope :home_care, -> { where(service: "Home care") }
+  scope :other, -> { where(service: "Other") }
 
   def encrypt_mobile_confirmation_code
     if mobile_confirmation_code.present?
