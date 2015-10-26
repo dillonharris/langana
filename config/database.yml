@@ -5,15 +5,15 @@ default: &default
 
 development:
   <<: *default
-  username: dillon
-  password: griffzonen
+  username: langana
+  password: <%= ENV['LANGANA_POSTGRES_PASSWORD'] %>
   host: localhost
   database: old_langana_development
 
 test:
   <<: *default
-  username: dillon
-  password: griffzonen
+  username: langana
+  password: <%= ENV['LANGANA_POSTGRES_PASSWORD'] %>
   host: localhost
   database: old_langana_test
 
