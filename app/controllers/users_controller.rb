@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:index, :new_worker, :new_employer, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
-  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
+  before_action :require_correct_user, only: [:edit, :edit_worker, :edit_employer ,:update, :destroy, :confirm, :verify_confirmation]
 
   def index
     case params[:scope]
@@ -139,12 +139,19 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if @user.role == "worker"
+      redirect_to edit_worker_user_path(@user)
+    else
+      redirect_to edit_employer_user_path(@user)
+    end
   end
 
   def edit_worker
+
   end
 
   def edit_employer
+
   end
 
   def update

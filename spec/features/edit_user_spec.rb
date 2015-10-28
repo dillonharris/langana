@@ -8,6 +8,7 @@ describe "Editing a user" do
     click_link 'Edit Account'
     expect(current_path).to eq(edit_employer_user_path(user))
     expect(find_field('user_first_name').value).to eq(user.first_name)
+    fill_in "First name", with: "Updated User First name"
     click_button "Update Account"
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("Updated User First name")
@@ -44,9 +45,9 @@ describe "Editing a user" do
   end
 
   it "does not update the user if it's invalid" do
-    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:user, role: 'worker')
     sign_in(user)
-    visit edit_user_url(user)
+    visit edit_worker_user_url(user)
     fill_in 'user_first_name', with: " "
     click_button "Update Account"
     expect(page).to have_text('error')
