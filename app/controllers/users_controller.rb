@@ -157,8 +157,10 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to @user, notice: "Account successfully updated!"
+    elsif @user.role == "worker"
+      render :edit_worker
     else
-      render :edit
+      render :edit_employer
     end
   end
 
