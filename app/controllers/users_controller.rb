@@ -1,10 +1,37 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:index, :new_worker, :new_employer, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
-  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
+  before_action :require_correct_user, only: [:edit, :edit_worker, :edit_employer ,:update, :destroy, :confirm, :verify_confirmation]
 
   def index
-    @users = User.workers.confirmed
+    case params[:scope]
+    when "gardening"
+      @users = User.workers.gardening
+    when "domestic"
+      @users = User.workers.domestic
+    when "nannying"
+      @users = User.workers.nannying
+    when "labour"
+      @users = User.workers.labour
+    when "painting"
+      @users = User.workers.painting
+    when "carpentry"
+      @users = User.workers.carpentry
+    when "building"
+      @users = User.workers.building
+    when "plumbing"
+      @users = User.workers.plumbing
+    when "electrical"
+      @users = User.workers.electrical
+    when "pet_care"
+      @users = User.workers.pet_care
+    when "home_care"
+      @users = User.workers.home_care
+    when "other"
+      @users = User.workers.other
+    else
+      @users = User.workers.confirmed
+    end
   end
 
   def show
@@ -112,13 +139,28 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if @user.role == "worker"
+      redirect_to edit_worker_user_path(@user)
+    else
+      redirect_to edit_employer_user_path(@user)
+    end
+  end
+
+  def edit_worker
+
+  end
+
+  def edit_employer
+
   end
 
   def update
     if @user.update(user_params)
       redirect_to @user, notice: "Account successfully updated!"
+    elsif @user.role == "worker"
+      render :edit_worker
     else
-      render :edit
+      render :edit_employer
     end
   end
 

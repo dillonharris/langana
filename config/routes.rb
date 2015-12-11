@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :work_references
     member do
+      get :edit_worker
+      get :edit_employer
       get :new_password
       patch :reset_password
       get :confirm
@@ -19,4 +21,6 @@ Rails.application.routes.draw do
       get :resend_confirmation
     end
   end
+
+  get "users/filter/:scope" => "users#index", as: :filtered_users
 end
