@@ -1,18 +1,25 @@
-<header id="page-header">
-  <div id="masthead">
-    <h1><%= link_to 'Langana', root_path %></h1>
-    <nav>
-      <p>
-        <% if current_user %>
-          <%= link_to current_user.first_name, current_user %>
-	  <%= link_to 'Confirm phone number', confirm_user_path(current_user), class: 'button' unless current_user.confirmed_at %>
-          <%= link_to 'Account Settings', edit_user_path(current_user), class: 'button' %>
-          <%= link_to 'Sign Out', session_path, method: :delete, class: 'button' %>
-        <% else %>
-          <%= link_to 'Sign Up', choose_role_path, class: 'button' %>
-          <%= link_to 'Sign In', signin_path, class: 'button' %>
-        <% end %>
-      </p>
-    </nav>
-  </div>
+<header>
+    <nav class="navbar navbar-inverse" role="navigation">
+    <h1 id="logo"><%= link_to 'Langana', root_path, {style: 'text-decoration:none' } %></h1>
+    <div>
+      <nav>
+        <div class="btn-group">
+          <div class="btn-group">
+            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Options<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+          <% if current_user %>
+            <li><%= link_to current_user.first_name, current_user %></li> 
+            <li><%= link_to 'Confirm phone number', confirm_user_path(current_user) unless current_user.confirmed_at %></li>
+            <li><%= link_to 'Account Settings', edit_user_path(current_user) %></li>
+            <li><%= link_to 'Sign Out', session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Sign In', signin_path %></li>
+            <li><%= link_to 'Sign Up', choose_role_path %></li>
+          <% end %>
+              </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </nav>
 </header>
