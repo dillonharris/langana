@@ -1,4 +1,4 @@
-<header id="content-header">
+<header class"blue_header">
   <h1>Confirm Phone Number</h1>
 </header>
 
@@ -8,7 +8,7 @@
       <%= render "shared/errors", object: @user %>
       <fieldset>
         <ol>
-          <li class="required">
+          <li>
             <%= f.label :mobile_confirmation_code %>
             <%= f.text_field :mobile_confirmation_code, size: 40, autofocus: true %>
           </li>

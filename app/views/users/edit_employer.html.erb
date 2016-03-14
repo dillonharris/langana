@@ -1,4 +1,4 @@
-<header id="content-header">
+<header class="blue_header">
   <h1>Edit Account</h1>
 </header>
 
@@ -8,35 +8,35 @@
       <%= render "shared/errors", object: @user %>
       <fieldset>
         <ol>
-          <li class="required">
+          <li>
             <%= f.label :worker, 'I am looking for work', autofocus: true %>
             <%= f.radio_button :role, 'worker' %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :employer, 'I am wanting to hire' %>
             <%= f.radio_button :role, 'employer' %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :first_name %>
             <%= f.text_field :first_name, size: 40 %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :last_name %>
             <%= f.text_field :last_name, size: 40 %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :mobile_number %>
             <%= f.telephone_field :mobile_number, size: 12 %>
           </li>
-          <li class="form-group">
+          <li>
             <%= f.label :profile_picture %>
             <%= f.file_field :profile_picture %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :password %>
             <%= f.password_field :password, size: 40 %>
           </li>
-          <li class="required">
+          <li>
             <%= f.label :password_confirmation, "Confirm Password" %>
             <%= f.password_field :password_confirmation, size: 40 %>
           </li>
