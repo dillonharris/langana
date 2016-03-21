@@ -9,7 +9,7 @@ describe "Resetting a user's password" do
     expect(page).to have_text("Don't worry")
   end
 
-  it "takes a mobile number & sends a reset code if it's found in the databse" do
+  it "takes a mobile number & sends a reset code if it's found in the databse", :vcr do
     allow(ConfirmationCode).to receive(:random_code).and_return("abcde")
     user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_code: "abcde")
     visit forgot_password_path
@@ -32,7 +32,7 @@ describe "Resetting a user's password" do
     expect(page).to have_text("No account with that phone number")
   end
 
-  it "only accepts the reset code one time" do
+  it "only accepts the reset code one time", :vcr do
     user = FactoryGirl.create(:user, mobile_number: "+27795555555", mobile_confirmation_code: "abcde")
     visit forgot_password_path
     fill_in "Mobile number", with: user.mobile_number

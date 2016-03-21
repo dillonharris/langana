@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Creating a new user" do
-  it "saves a worker user and shows the user's profile page" do
+  it "saves a worker user and shows the user's profile page", :vcr do
     visit root_url
 
     click_link 'Sign Up'
@@ -55,7 +55,7 @@ describe "Creating a new user" do
     expect(page).not_to have_link('Sign Up')
   end
 
-  it "saves an employer user and shows the user's profile page" do
+  it "saves an employer user and shows the user's profile page", :vcr do
     visit choose_role_path
 
     click_link 'I am wanting to hire'
