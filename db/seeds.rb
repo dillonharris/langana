@@ -2,9 +2,9 @@ User.create!([
   {
     first_name: "De Wet",
     last_name: "Blomerus",
-    mobile_number: "+27720000000",
-    password: "secret",
-    password_confirmation: "secret",
+    mobile_number: "+27792958514",
+    password: "sdflkj",
+    password_confirmation: "sdflkj",
     confirmed_at: Time.now,
     role: 'worker',
     service: 'Gardening'

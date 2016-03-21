@@ -17,3 +17,8 @@
 
 # Ignore all brakeman output
 /breakoutput*
+
+# Ignore the .env folder
+.env
+
+/public/uploads
