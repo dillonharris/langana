@@ -11,4 +11,3 @@ CarrierWave.configure do |config|
     region:            'eu-west-1'
   }
 end
-
