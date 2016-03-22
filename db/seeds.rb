@@ -32,7 +32,7 @@ User.create!([
   {
     first_name: "Nathaniel",
     last_name: "Rhoda",
-    mobile_number: "+27720000003",
+    mobile_number: "+27631568522",
     password: "secret",
     password_confirmation: "secret",
     confirmed_at: Time.now,
