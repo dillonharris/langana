@@ -20,7 +20,6 @@ gem 'sinch_sms'
 gem 'bootstrap-sass', '~>3.3.4.1'
 gem 'autoprefixer-rails', '~>5.2.0'
 
-
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil
