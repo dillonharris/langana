@@ -1,12 +1,14 @@
 <article>
   <header>
-    <%= image_tag @user.profile_picture.large.url %>
-    <h1>Name: <%= @user.first_name %></h1>
-    <h2><%= mail_to(@user.email) %></h2>
-    <h2>Role: <%= @user.role.capitalize if @user.role %></h2>
-    <h2>Occupation: <%= @user.service if @user.service %></h2>
-    <h2>Phone number: <%= @user.mobile_number if @user.mobile_number %></h2>
-    <h2><%= @user.home_language if @user.home_language %></h2>
+    <div class="profile-img">
+      <%= image_tag @user.profile_picture.large.url %>
+    </div>
+      <h1>Name: <%= @user.first_name %></h1>
+      <h2><%= mail_to(@user.email) %></h2>
+      <h2>Role: <%= @user.role.capitalize if @user.role %></h2>
+      <h2>Occupation: <%= @user.service if @user.service %></h2>
+      <h2>Phone number: <%= @user.mobile_number if @user.mobile_number %></h2>
+      <h2><%= @user.home_language if @user.home_language %></h2>
   </header>
 
   <footer>
