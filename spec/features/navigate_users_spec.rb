@@ -6,9 +6,9 @@ describe "Navigating users" do
 
     visit user_url(user)
 
-    click_link "All Users"
+    click_link "Langana"
 
-    expect(current_path).to eq(users_path)
+    expect(current_path).to eq(root_path)
   end
 
   it "allows navigation from the listing page to the profile page" do
