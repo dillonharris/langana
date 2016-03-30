@@ -1,4 +1,4 @@
-User.create!([
+Worker.create!([
   {
     first_name: "De Wet",
     last_name: "Blomerus",
