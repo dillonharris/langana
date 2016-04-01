@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906200411) do
+ActiveRecord::Schema.define(version: 20160327162943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,42 @@ ActiveRecord::Schema.define(version: 20150906200411) do
 
   add_index "work_references", ["employer_user_id"], name: "index_work_references_on_employer_user_id", using: :btree
   add_index "work_references", ["worker_user_id"], name: "index_work_references_on_worker_user_id", using: :btree
+
+  create_table "workers", force: :cascade do |t|
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "gender"
+    t.string   "service"
+    t.string   "home_language"
+    t.string   "second_language"
+    t.string   "third_language"
+    t.string   "id_or_passport_number"
+    t.string   "id_or_passport_image"
+    t.string   "country_of_citizenship"
+    t.string   "work_permit_status"
+    t.string   "work_permit_image"
+    t.string   "street_address"
+    t.string   "unit"
+    t.string   "suburb"
+    t.string   "city"
+    t.string   "province"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "drivers_license"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "mobile_number"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "profile_picture"
+    t.integer  "role"
+    t.string   "mobile_confirmation_code_digest"
+    t.string   "mobile_code_salt"
+    t.datetime "mobile_confirmation_sent_at"
+    t.datetime "confirmed_at"
+    t.string   "unconfirmed_mobile_number"
+    t.integer  "confirmation_attempts",           default: 0
+  end
 
   add_foreign_key "work_references", "users", column: "employer_user_id", on_delete: :cascade
   add_foreign_key "work_references", "users", column: "worker_user_id", on_delete: :cascade

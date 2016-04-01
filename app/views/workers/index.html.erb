@@ -1,0 +1,16 @@
+<header class="center">
+  <h1>Find someone in Cape Town to get the job done</h1>
+</header>
+
+<div class="col-sm-6 col-md-4 col-lg-2">
+  <%= render 'layouts/sidebar' %>
+  <ul id="users">
+    <% @workers.each do |worker| %>
+      <li>
+        <%= link_to worker.first_name, worker, {style: 'text-decoration:none' } %>
+        -
+        <%= worker.service %>
+      </li>
+    <% end %>
+  </ul>
+</div>
