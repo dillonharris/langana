@@ -74,4 +74,8 @@ class Worker < ActiveRecord::Base
     self.mobile_number = ApplicationHelper.format_mobile(self.mobile_number)
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end

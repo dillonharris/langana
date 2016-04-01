@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :workers do 
+    resources :work_references
     member do
       get :confirm
       post :verify_confirmation

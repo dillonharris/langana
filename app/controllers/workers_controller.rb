@@ -1,42 +1,25 @@
 class WorkersController < ApplicationController
 
-  before_action :require_signin, except: [:index, :edit, :update, :show, :new, :destroy, :create, :forgot_password, :send_reset_code, :reset_password, :new_password, :confirm, :verify_confirmation]
-  before_action :require_correct_worker, only: [:edit, :show ,:update, :destroy]
+  before_action :require_signin, except: [:index, :edit, :update, :new, :destroy, :create, :forgot_password, :send_reset_code, :reset_password, :new_password, :confirm, :verify_confirmation]
+  before_action :require_correct_worker, only: [:edit, :update, :destroy, :confirm]
 
   def index
-    case params[:scope]
-      when "gardening"
-        @workers = Worker.gardening
-      when "domestic"
-        @workers = Worker.domestic
-      when "nannying"
-        @workers = Worker.nannying
-      when "labour"
-        @workers = Worker.labour
-      when "painting"
-        @workers = Worker.painting
-      when "carpentry"
-        @workers = Worker.carpentry
-      when "building"
-        @workers = Worker.building
-      when "plumbing"
-        @workers = Worker.plumbing
-      when "electrical"
-        @workers = Worker.electrical
-      when "pet_care"
-        @workers = Worker.pet_care
-      when "home_care"
-        @workers = Worker.home_care
-      when "other"
-        @workers = Worker.other
-      else
-        @workers = Worker.confirmed
+    scope = params[:scope]
+    if scope && Worker.respond_to?(scope)
+      @workers = Worker.send(scope)
+    else
+      @workers = Worker.confirmed
     end
   end
 
   def show
     @worker = Worker.find(params[:id])
-    redirect_to(confirm_worker_path(current_user)) unless current_user.confirmed_at or current_worker?(@worker)
+    if current_user
+      if current_user.confirmed_at == nil
+        # Check that user should be signed in
+        redirect_to(confirm_worker_path(current_user)) # current_worker?(@worker) || workers_path(@worker)
+      end
+    end
   end
 
   def new
@@ -59,7 +42,6 @@ class WorkersController < ApplicationController
   end
 
   def confirm
-    @worker = Worker.find(params[:id])
   end
 
   def verify_confirmation

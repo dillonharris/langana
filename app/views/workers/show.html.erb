@@ -3,7 +3,7 @@
     <div class="profile-img">
       <%= image_tag @worker.profile_picture.large.url %>
     </div>
-    <h1>Name: <%= @worker.first_name %></h1>
+    <h1>Name: <%= @worker.full_name %></h1>
     <h2><%= mail_to(@worker.email) %></h2>
     <%- #<h2>Role: <%= @worker.role.capitalize if @worker.role</h2> %>
     <h2>Occupation: <%= @worker.service if @worker.service %></h2>
