@@ -7,16 +7,6 @@ Worker.create!([
     password_confirmation: "secret",
     confirmed_at: Time.now,
     role: 'worker',
-    service: 'Gardening'
-  },
-  {
-    first_name: "Marysol",
-    last_name: "Blomerus",
-    mobile_number: "+27720000001",
-    password: "secret",
-    password_confirmation: "secret",
-    confirmed_at: Time.now,
-    role: 'worker',
     service: 'Other'
   },
   {
@@ -98,5 +88,18 @@ Worker.create!([
     confirmed_at: Time.now,
     role: 'worker',
     service: "Pet care"
+  }
+])
+
+
+User.create!([
+  {
+    first_name: "Marysol",
+    last_name: "Blomerus",
+    mobile_number: "+27722857438",
+    password: "secret",
+    password_confirmation: "secret",
+    confirmed_at: Time.now,
+    role: 'employer'
   }
 ])

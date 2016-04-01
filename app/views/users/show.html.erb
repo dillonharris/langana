@@ -14,12 +14,12 @@
   <footer>
     <nav>
       <% if current_user?(@user) %>
-        <%= link_to 'Edit Account', edit_user_path(@user), class: "btn btn-primary" %> 
-        <%= link_to 'Delete Account', @user, 
+        <%= link_to 'Edit Account', edit_user_path(@user), class: "btn btn-primary" %>
+        <%= link_to 'Delete Account', @user,
                     method: :delete,
-                    data: { confirm: 'Are you sure you want to permanently delete your account?' }, class: "btn btn-danger" %> 
+                    data: { confirm: 'Are you sure you want to permanently delete your account?' }, class: "btn btn-danger" %>
       <% else %>
-        <%= link_to 'Give Reference', new_user_work_reference_path(@user), class: "btn btn-primary" %> 
+        <%= link_to 'Give Reference', new_worker_work_reference_path(@user), class: "btn btn-primary" %>
       <% end %>
     </nav>
 
