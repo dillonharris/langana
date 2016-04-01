@@ -4,7 +4,7 @@ class Worker < ActiveRecord::Base
   attr_accessor :mobile_confirmation_code
   has_secure_password
 
-  has_many :work_references_received, class_name: "WorkReference", foreign_key: :worker_user_id
+  has_many :work_references
   
   mount_uploader :profile_picture, ProfilePictureUploader
   
