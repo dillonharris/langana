@@ -4,34 +4,7 @@ class UsersController < ApplicationController
   before_action :require_correct_user, only: [:edit, :edit_worker, :edit_employer ,:update, :destroy, :confirm, :verify_confirmation]
 
   def index
-    case params[:scope]
-    when "gardening"
-      @users = User.workers.gardening
-    when "domestic"
-      @users = User.workers.domestic
-    when "nannying"
-      @users = User.workers.nannying
-    when "labour"
-      @users = User.workers.labour
-    when "painting"
-      @users = User.workers.painting
-    when "carpentry"
-      @users = User.workers.carpentry
-    when "building"
-      @users = User.workers.building
-    when "plumbing"
-      @users = User.workers.plumbing
-    when "electrical"
-      @users = User.workers.electrical
-    when "pet_care"
-      @users = User.workers.pet_care
-    when "home_care"
-      @users = User.workers.home_care
-    when "other"
-      @users = User.workers.other
-    else
-      @users = User.workers.confirmed
-    end
+    @users = User.all
   end
 
   def show

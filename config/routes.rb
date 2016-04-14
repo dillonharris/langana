@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :workers do 
+  resources :workers do
     resources :work_references
     member do
       get :confirm
@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   get 'choose_role' => 'visitors#choose_role'
   resources :users do
     member do
-      get :edit_worker
       get :edit_employer
       get :new_password
       patch :reset_password
@@ -31,5 +30,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "users/filter/:scope" => "users#index", as: :filtered_users
+  get "workers/filter/:scope" => "workers#index", as: :filtered_workers
 end

@@ -1,6 +1,6 @@
 class WorkersController < ApplicationController
 
-  before_action :require_signin, except: [:index, :edit, :update, :new, :destroy, :create, :forgot_password, :send_reset_code, :reset_password, :new_password, :confirm, :verify_confirmation]
+  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password, :confirm, :verify_confirmation]
   before_action :require_correct_worker, only: [:edit, :update, :destroy, :confirm]
 
   def index
@@ -63,7 +63,7 @@ class WorkersController < ApplicationController
   def update
     if @worker.update(worker_params)
       redirect_to @worker, notice: "Account successfully updated!"
-    else 
+    else
       render :edit
     end
   end
