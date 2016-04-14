@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'support/authentication'
 
 describe "Creating a new work reference" do
-  it "saves the work reference and shows the reference on the worker's detail page" do
-    user1 = FactoryGirl.create(:user)
+  it "saves the work reference and shows the reference on the user's detail page" do
+    employer = FactoryGirl.create(:user)
     worker = FactoryGirl.create(:worker,
                         first_name: "Jeremy",
                         last_name: "Ramos",
@@ -13,7 +13,7 @@ describe "Creating a new work reference" do
                       )
 
 
-    sign_in(user1)
+    sign_in(employer)
 
     visit worker_path(worker)
 
@@ -27,14 +27,14 @@ describe "Creating a new work reference" do
 
     click_button 'Save Reference'
 
-    expect(current_path).to eq(worker_path(worker))
+    expect(current_path).to eq(user_path(worker))
 
     expect(page).to have_text("Thanks for giving a reference!")
     expect(page).to have_text("They installed more ram")
   end
 
   it "does not save the review if it's invalid" do
-    user1 = FactoryGirl.create(:user)
+    employer = FactoryGirl.create(:user)
     worker = FactoryGirl.create(:worker,
                         first_name: "Other",
                         last_name: "Person",
@@ -44,7 +44,7 @@ describe "Creating a new work reference" do
                       )
 
 
-    sign_in(user1)
+    sign_in(employer)
 
     visit worker_path(worker)
 

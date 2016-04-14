@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get 'signup_employer' => 'users#new_employer'
   get 'choose_role' => 'visitors#choose_role'
   resources :users do
-    resources :work_references
     member do
       get :edit_worker
       get :edit_employer

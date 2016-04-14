@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for [@user, @work_reference], url: user_work_references_path, method: :post do |f| %>
+    <%= form_for [@worker, @work_reference], url: worker_work_references_path, method: :post do |f| %>
       <%= render "shared/errors", object: @work_reference %>
       <fieldset>
         <ol>
           <li>
-            <%= f.label :work, "What work did #{@user.first_name} do for you?" %>
+            <%= f.label :work, "What work did #{@worker.first_name} do for you?" %>
             <%= f.text_field :work, size: 40, autofocus: true %>
           </li>
 
@@ -16,7 +16,7 @@
         </ol>
         <p>
           <%= f.submit 'Save Reference', :class => 'btn btn-primary' %>
-          <%= link_to "Cancel", @user %>
+          <%= link_to "Cancel", @worker %>
         </p>
       </fieldset>
     <% end %>
