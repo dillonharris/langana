@@ -27,7 +27,7 @@ describe "Creating a new work reference" do
 
     click_button 'Save Reference'
 
-    expect(current_path).to eq(user_path(worker))
+    expect(current_path).to eq(worker_path(worker))
 
     expect(page).to have_text("Thanks for giving a reference!")
     expect(page).to have_text("They installed more ram")

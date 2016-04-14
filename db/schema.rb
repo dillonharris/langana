@@ -106,5 +106,4 @@ ActiveRecord::Schema.define(version: 20160414104946) do
   end
 
   add_foreign_key "work_references", "users", column: "employer_user_id", on_delete: :cascade
-  add_foreign_key "work_references", "users", column: "worker_id", on_delete: :cascade
 end

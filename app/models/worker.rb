@@ -4,7 +4,7 @@ class Worker < ActiveRecord::Base
   attr_accessor :mobile_confirmation_code
   has_secure_password
 
-  has_many :work_references
+  has_many :work_references, dependent: :delete_all
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
