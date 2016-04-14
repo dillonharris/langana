@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'support/authentication'
 
 describe "Creating a new work reference" do
-  it "saves the work reference and shows the reference on the user's detail page" do
+  it "saves the work reference and shows the reference on the worker's detail page" do
     user1 = FactoryGirl.create(:user)
-    user2 = FactoryGirl.create(:user,
+    worker = FactoryGirl.create(:worker,
                         first_name: "Jeremy",
                         last_name: "Ramos",
                         mobile_number: "0723423458",
@@ -15,19 +15,19 @@ describe "Creating a new work reference" do
 
     sign_in(user1)
 
-    visit user_path(user2)
+    visit worker_path(worker)
 
     click_link 'Give Reference'
 
-    expect(current_path).to eq(new_user_work_reference_path(user2))
+    expect(current_path).to eq(new_worker_work_reference_path(worker))
 
-    fill_in "What work did #{user2.first_name} do for you?", with: "#{user2.first_name} fixed my computer"
+    fill_in "What work did #{worker.first_name} do for you?", with: "#{worker.first_name} fixed my computer"
 
     fill_in "Comment", with: "They installed more ram, reinstalled my OS and restored all of my data. I could not be happier"
 
     click_button 'Save Reference'
 
-    expect(current_path).to eq(user_path(user2))
+    expect(current_path).to eq(worker_path(worker))
 
     expect(page).to have_text("Thanks for giving a reference!")
     expect(page).to have_text("They installed more ram")
@@ -35,7 +35,7 @@ describe "Creating a new work reference" do
 
   it "does not save the review if it's invalid" do
     user1 = FactoryGirl.create(:user)
-    user2 = FactoryGirl.create(:user,
+    worker = FactoryGirl.create(:worker,
                         first_name: "Other",
                         last_name: "Person",
                         mobile_number: "0723423459",
@@ -46,7 +46,7 @@ describe "Creating a new work reference" do
 
     sign_in(user1)
 
-    visit user_path(user2)
+    visit worker_path(worker)
 
     click_link 'Give Reference'
 

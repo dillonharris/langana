@@ -1,7 +1,7 @@
 class WorkReferencesController < ApplicationController
   def new
     @worker = Worker.find(params[:worker_id])
-    @work_reference = @worker.work_references_received.new
+    @work_reference = @worker.work_references.new
   end
 
   def create

@@ -5,9 +5,9 @@ class Worker < ActiveRecord::Base
   has_secure_password
 
   has_many :work_references
-  
+
   mount_uploader :profile_picture, ProfilePictureUploader
-  
+
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
