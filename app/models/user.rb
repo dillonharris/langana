@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
-  enum role: [:worker, :employer, :vip, :admin]
+  enum role: [:employer, :vip, :admin]
   enum gender: [:male, :female]
 
   validates_presence_of :first_name, :last_name, :mobile_number
@@ -20,49 +20,11 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
-  # with_options if: role == :worker do |worker|
-  #   worker.validates_presence_of :service
-  # end
-
-  SERVICES = [
-    'Gardening',
-    'Domestic',
-    'Nannying',
-    'Labour',
-    'Painting',
-    'Carpentry',
-    'Building',
-    'Plumbing',
-    'Electrical',
-    'Pet care',
-    'Home care',
-    'Other'
-  ]
-
-  WORK_PERMIT_STATUSES = [
-    'South African Citizen',
-    'Foreigner with work permit',
-    'Foreigner without work permit'
-  ]
-
   CITIES = [
     'Cape Town']
 
-  scope :workers, -> { where("role = ?", 0) }
   scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
-  scope :employers, -> { where("role = ?", 1) }
-  scope :gardening, -> { where(service: "Gardening") }
-  scope :domestic, -> { where(service: "Domestic") }
-  scope :nannying, -> { where(service: "Nannying") }
-  scope :labour, -> { where(service: "Labour") }
-  scope :painting, -> { where(service: "Painting") }
-  scope :carpentry, -> { where(service: "Carpentry") }
-  scope :building, -> { where(service: "Building") }
-  scope :plumbing, -> { where(service: "Plumbing") }
-  scope :electrical, -> { where(service: "Electrical") }
-  scope :pet_care, -> { where(service: "Pet care") }
-  scope :home_care, -> { where(service: "Home care") }
-  scope :other, -> { where(service: "Other") }
+  scope :employers, -> { where("role = ?", 0) }
 
   def encrypt_mobile_confirmation_code
     if mobile_confirmation_code.present?

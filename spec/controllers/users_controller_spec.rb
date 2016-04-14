@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UsersController do
 
   before do
-    @user = User.create!(first_name: "User", last_name: "Userson", mobile_number: "0727777777", password: "secret")
+    @user = FactoryGirl.create(:user, first_name: "User", last_name: "Userson", mobile_number: "0727777777", password: "secret")
   end
 
   context "when not signed in" do
