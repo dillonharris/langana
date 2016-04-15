@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'support/authentication'
 
 describe 'Creating a new work reference' do
-  it "saves the work reference and shows the reference on the user's detail page" do
+  it "saves work reference and shows reference on the user's detail page" do
     employer = FactoryGirl.create(:user)
     worker = FactoryGirl.create(:worker,
                                 first_name: 'Jeremy',
@@ -22,7 +22,7 @@ describe 'Creating a new work reference' do
 
     fill_in "What work did #{worker.first_name} do for you?", with: "#{worker.first_name} fixed my computer"
 
-    fill_in 'Comment', with: 'They installed more ram, reinstalled my OS and restored all of my data. I could not be happier'
+    fill_in 'Comment', with: 'They installed more ram. I could not be happier'
 
     click_button 'Save Reference'
 
