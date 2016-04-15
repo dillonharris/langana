@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.10'
 gem 'pry'
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem 'carrierwave'
 gem 'carrierwave-aws'
@@ -22,7 +22,7 @@ gem 'autoprefixer-rails', '~>5.2.0'
 
 group :development do
   gem 'better_errors'
-  gem 'hub', :require=>nil
+  gem 'hub', require: nil
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring-commands-rspec'

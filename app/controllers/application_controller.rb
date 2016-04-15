@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-private
+  private
 
   def require_signin
     unless current_user
       session[:intended_url] = request.url
-      redirect_to new_session_url, alert: "Please sign in first"
+      redirect_to new_session_url, alert: 'Please sign in first'
     end
   end
 
@@ -16,7 +16,7 @@ private
     assign_user if @current_user.nil?
     @current_user
   end
-helper_method :current_user
+  helper_method :current_user
 
   def assign_user
     @current_user = current_employer || current_worker
@@ -29,16 +29,15 @@ helper_method :current_user
   def current_worker
     @current_worker ||= Worker.find(session[:worker_id]) if session[:worker_id]
   end
-helper_method :current_worker
+  helper_method :current_worker
 
   def current_user?(user)
     current_user == user
   end
-helper_method :current_user?
+  helper_method :current_user?
 
   def current_worker?(worker)
     current_worker == worker
   end
-helper_method :current_worker?
-
+  helper_method :current_worker?
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :workers do
     resources :work_references
     member do
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root "workers#index"
+  root 'workers#index'
   get 'signin' => 'sessions#new'
   get 'workers_signin' => 'workers_sessions#new'
   resource :workers_session
@@ -30,5 +29,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "workers/filter/:scope" => "workers#index", as: :filtered_workers
+  get 'workers/filter/:scope' => 'workers#index', as: :filtered_workers
 end

@@ -9,9 +9,9 @@ describe 'given a user called workie and a worker review for workie' do
 
   describe 'when i delete the user workie' do
     it 'then the review should no longer exist' do
-      work_references_count= WorkReference.all.count
+      work_references_count = WorkReference.all.count
       @workie.destroy
-      expect work_references_count!= WorkReference.all.count
+      expect work_references_count != WorkReference.all.count
       error = "Couldn't find WorkReference with 'id'=#{@work_reference.id}"
       expect { WorkReference.find(@work_reference.id) }.to raise_error error
     end

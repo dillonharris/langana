@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-describe "Navigating users" do
-  it "allows navigation from the profile page to the listing page" do
+describe 'Navigating users' do
+  it 'allows navigation from the profile page to the listing page' do
     user = FactoryGirl.create(:user)
 
     visit user_url(user)
 
-    click_link "Langana"
+    click_link 'Langana'
 
     expect(current_path).to eq(root_path)
   end
 
-  it "allows navigation from the listing page to the profile page" do
+  it 'allows navigation from the listing page to the profile page' do
     user = FactoryGirl.create(:user)
 
     sign_in(user)
@@ -22,5 +22,4 @@ describe "Navigating users" do
 
     expect(current_path).to eq(user_path(user))
   end
-
 end

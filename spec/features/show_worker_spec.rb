@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-describe "Viewing an individual worker" do
-
-  it 'goes to workers show page from root page' do 
+describe 'Viewing an individual worker' do
+  it 'goes to workers show page from root page' do
     worker = FactoryGirl.create(:worker)
     visit '/'
 

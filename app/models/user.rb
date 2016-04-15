@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_accessor :mobile_confirmation_code
   has_secure_password
 
-  has_many :work_references_written, class_name: "WorkReference", foreign_key: :employer_user_id
+  has_many :work_references_written, class_name: 'WorkReference', foreign_key: :employer_user_id
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
@@ -14,17 +14,17 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
-    length: { minimum: 12, maximum: 12, allow_blank: false },
-                        format: /\+\d{11}\z/,
-    uniqueness: { case_sensitive: false }
+                            length: { minimum: 12, maximum: 12, allow_blank: false },
+                            format: /\+\d{11}\z/,
+                            uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
   CITIES = [
-    'Cape Town']
+    'Cape Town'].freeze
 
-  scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
-  scope :employers, -> { where("role = ?", 0) }
+  scope :confirmed, -> { where('confirmed_at IS NOT NULL').order(first_name: :asc) }
+  scope :employers, -> { where('role = ?', 0) }
 
   def encrypt_mobile_confirmation_code
     if mobile_confirmation_code.present?
@@ -40,7 +40,6 @@ class User < ActiveRecord::Base
   end
 
   def format_mobile_number
-    self.mobile_number = ApplicationHelper.format_mobile(self.mobile_number)
+    self.mobile_number = ApplicationHelper.format_mobile(mobile_number)
   end
 end
-

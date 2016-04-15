@@ -1,8 +1,8 @@
 require 'rails_helper'
 require 'support/authentication'
 
-describe "Deleting a worker" do 
-  xit "destroys the worker and redirects to the home page" do
+describe 'Deleting a worker' do
+  xit 'destroys the worker and redirects to the home page' do
     worker = FactoryGirl.create(:worker)
 
     sign_in(worker)
@@ -19,7 +19,7 @@ describe "Deleting a worker" do
     expect(page).not_to have_text(worker.name)
   end
 
-  it "automatically signs out that worker" do
+  it 'automatically signs out that worker' do
     worker = FactoryGirl.create(:worker)
 
     sign_in(worker)
@@ -30,5 +30,4 @@ describe "Deleting a worker" do
     expect(page).to have_link('Sign In')
     expect(page).not_to have_link('Sign Out')
   end
-
 end

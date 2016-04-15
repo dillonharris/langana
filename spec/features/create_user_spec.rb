@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Creating a new user" do
+describe 'Creating a new user' do
   it "saves an employer user and shows the user's profile page", :vcr do
     visit choose_role_path
 
@@ -8,12 +8,12 @@ describe "Creating a new user" do
 
     expect(current_path).to eq(signup_employer_path)
 
-#    choose 'user_role_employer'
-    fill_in "user_first_name",  with: "Emplie"
-    fill_in "user_last_name", with: "Employerson"
-    fill_in "user_mobile_number", with: "0792857439"
-    fill_in "user_password", with: "secret"
-    fill_in "user_password_confirmation", with: "secret"
+    #    choose 'user_role_employer'
+    fill_in 'user_first_name', with: 'Emplie'
+    fill_in 'user_last_name', with: 'Employerson'
+    fill_in 'user_mobile_number', with: '0792857439'
+    fill_in 'user_password', with: 'secret'
+    fill_in 'user_password_confirmation', with: 'secret'
 
     click_button 'Create Account'
 
@@ -21,7 +21,7 @@ describe "Creating a new user" do
     expect(page).to have_text('Thanks for signing up!')
     expect(User.last.confirmed_at).to be_nil
     expect(User.last.role).to eq('employer')
-    visit user_path((User.last))
+    visit user_path(User.last)
     expect(page).to have_text('Emplie')
     expect(page).not_to have_link('Sign In')
     expect(page).not_to have_link('Sign Up')
@@ -30,11 +30,10 @@ describe "Creating a new user" do
   it "does not save the user if it's invalid" do
     visit signup_employer_path
 
-    expect {
+    expect do
       click_button 'Create Account'
-    }.not_to change(User, :count)
+    end.not_to change(User, :count)
 
     expect(page).to have_text('error')
   end
 end
-

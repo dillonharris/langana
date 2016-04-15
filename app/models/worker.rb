@@ -11,9 +11,9 @@ class Worker < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :mobile_number
 
   validates :mobile_number, presence: true,
-    length: { minimum: 12, maximum: 12, allow_blank: false },
-                        format: /\+\d{11}\z/,
-    uniqueness: { case_sensitive: false }
+                            length: { minimum: 12, maximum: 12, allow_blank: false },
+                            format: /\+\d{11}\z/,
+                            uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6, allow_blank: true }
 
@@ -30,32 +30,32 @@ class Worker < ActiveRecord::Base
     'Pet care',
     'Home care',
     'Other'
-  ]
+  ].freeze
 
-  scope :workers, -> { where("role = ?", 0) }
-  scope :confirmed, -> { where("confirmed_at IS NOT NULL").order(first_name: :asc) }
-  scope :employers, -> { where("role = ?", 1) }
-  scope :gardening, -> { where(service: "Gardening") }
-  scope :domestic, -> { where(service: "Domestic") }
-  scope :nannying, -> { where(service: "Nannying") }
-  scope :labour, -> { where(service: "Labour") }
-  scope :painting, -> { where(service: "Painting") }
-  scope :carpentry, -> { where(service: "Carpentry") }
-  scope :building, -> { where(service: "Building") }
-  scope :plumbing, -> { where(service: "Plumbing") }
-  scope :electrical, -> { where(service: "Electrical") }
-  scope :pet_care, -> { where(service: "Pet care") }
-  scope :home_care, -> { where(service: "Home care") }
-  scope :other, -> { where(service: "Other") }
-  
+  scope :workers, -> { where('role = ?', 0) }
+  scope :confirmed, -> { where('confirmed_at IS NOT NULL').order(first_name: :asc) }
+  scope :employers, -> { where('role = ?', 1) }
+  scope :gardening, -> { where(service: 'Gardening') }
+  scope :domestic, -> { where(service: 'Domestic') }
+  scope :nannying, -> { where(service: 'Nannying') }
+  scope :labour, -> { where(service: 'Labour') }
+  scope :painting, -> { where(service: 'Painting') }
+  scope :carpentry, -> { where(service: 'Carpentry') }
+  scope :building, -> { where(service: 'Building') }
+  scope :plumbing, -> { where(service: 'Plumbing') }
+  scope :electrical, -> { where(service: 'Electrical') }
+  scope :pet_care, -> { where(service: 'Pet care') }
+  scope :home_care, -> { where(service: 'Home care') }
+  scope :other, -> { where(service: 'Other') }
+
   WORK_PERMIT_STATUSES = [
     'South African Citizen',
     'Foreigner with work permit',
     'Foreigner without work permit'
-  ]
+  ].freeze
 
   CITIES = [
-    'Cape Town']
+    'Cape Town'].freeze
 
   def encrypt_mobile_confirmation_code
     if mobile_confirmation_code.present?
@@ -71,11 +71,10 @@ class Worker < ActiveRecord::Base
   end
 
   def format_mobile_number
-    self.mobile_number = ApplicationHelper.format_mobile(self.mobile_number)
+    self.mobile_number = ApplicationHelper.format_mobile(mobile_number)
   end
 
   def full_name
     "#{first_name} #{last_name}"
   end
-
 end

@@ -6,14 +6,12 @@ class WorkReferencesController < ApplicationController
 
   def create
     @worker = Worker.find(params[:worker_id])
-    @work_reference = WorkReference.new({
-      work: work_reference_params['work'],
-      comment: work_reference_params['comment'],
-      worker: @worker,
-      employer_user: current_user
-    })
+    @work_reference = WorkReference.new(work: work_reference_params['work'],
+                                        comment: work_reference_params['comment'],
+                                        worker: @worker,
+                                        employer_user: current_user)
     if @work_reference.save
-      redirect_to @work_reference.worker, notice: "Thanks for giving a reference!"
+      redirect_to @work_reference.worker, notice: 'Thanks for giving a reference!'
     else
       render :new
     end
@@ -22,7 +20,7 @@ class WorkReferencesController < ApplicationController
   private
 
   def work_reference_params
-    params.require(:work_reference).
-    permit(:work, :comment)
+    params.require(:work_reference)
+          .permit(:work, :comment)
   end
 end
