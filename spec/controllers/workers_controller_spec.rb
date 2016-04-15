@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe WorkersController, type: :controller do
-	  before do
+  before do
     @worker = FactoryGirl.create(:worker, first_name: "worker", last_name: "Workerson", mobile_number: "0727777777", password: "secret")
   end
 
@@ -34,8 +34,8 @@ RSpec.describe WorkersController, type: :controller do
   context "when signed in as the wrong worker" do
 
     before do
-      @wrong_user = FactoryGirl.create(:worker, mobile_number: "0791234567")
-      session[:user_id] = @wrong_user.id
+      @wrong_worker = FactoryGirl.create(:worker, mobile_number: "0791234567")
+      session[:worker_id] = @wrong_worker.id
     end
 
     it "cannot edit another worker" do

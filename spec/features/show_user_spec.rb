@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe "Viewing an individual user" do
+  let (:worker) { FactoryGirl.create(:worker) }
 
   it "shows the user's details" do
     user = FactoryGirl.create(:user)
@@ -11,7 +12,6 @@ describe "Viewing an individual user" do
   end
 
   it "shows a worker's details to confirmed potential employers" do
-    worker = FactoryGirl.create(:worker)
     employer = FactoryGirl.create(:user, role: "employer")
     sign_in(employer)
     visit worker_url(worker)
@@ -20,7 +20,6 @@ describe "Viewing an individual user" do
   end
 
   it "redirect unconfirmed employers to their confirmation page" do
-    worker = FactoryGirl.create(:worker)
     employer = FactoryGirl.create(:user, role: "employer", confirmed_at: nil)
     sign_in(employer)
     visit worker_url(worker)

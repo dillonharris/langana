@@ -101,6 +101,14 @@ User.create!([
     password_confirmation: "secret",
     confirmed_at: Time.now,
     role: 'employer'
+  },
+  {
+    first_name: "Unconfirmie",
+    last_name: "Unconfirmerson",
+    mobile_number: "+27722857439",
+    password: "secret",
+    password_confirmation: "secret",
+    role: 'employer'
   }
 ])
 
