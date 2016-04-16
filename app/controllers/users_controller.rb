@@ -29,12 +29,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       ConfirmationCode.generate(@user)
       redirect_to confirm_user_path(@user), notice: 'Thanks for signing up! Please enter the confirmation code sent to your mobile phone'
-    elsif @user.role == 'worker'
-      render :new_worker
-    elsif @user.role == 'employer'
-      render :new_employer
     else
-      redirect_to choose_role_path
+      render :new_employer
     end
   end
 
@@ -99,7 +95,7 @@ class UsersController < ApplicationController
     @user.save
     if @user.confirmation_attempts > 9
       redirect_to forgot_password_path, alert: 'You have typed in the wrong code too many times, please try again tomorrow'
-    elsif BCrypt::Engine.hash_secret(submitted_code, @user.mobile_code_salt) == @user.mobile_confirmation_code_digest
+    elsif correct_confirmation_code?(submitted_code)
       @user.update(user_params)
       @user.mobile_confirmation_code_digest = ''
       @user.save
@@ -167,5 +163,9 @@ class UsersController < ApplicationController
   def require_correct_user
     @user = User.find(params[:id])
     redirect_to root_url unless current_user?(@user)
+  end
+
+  def correct_confirmation_code?(submitted_code)
+    BCrypt::Engine.hash_secret(submitted_code, @user.mobile_code_salt) == @user.mobile_confirmation_code_digest
   end
 end
