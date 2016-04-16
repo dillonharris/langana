@@ -1,5 +1,6 @@
 class WorkersController < ApplicationController
-  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password, :confirm, :verify_confirmation]
+  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
+#  before_action :require_confirmed_employer, only: [:show]
   before_action :require_correct_worker, only: [:edit, :update, :destroy, :confirm]
 
   def index
