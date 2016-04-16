@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe WorkersController, type: :controller do
   before do
-    @worker = FactoryGirl.create(:worker, first_name: 'worker', last_name: 'Workerson', mobile_number: '0727777777', password: 'secret')
+    @worker = FactoryGirl.create(:worker)
   end
 
   context 'when not signed in' do
