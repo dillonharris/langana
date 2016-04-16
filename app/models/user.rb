@@ -42,4 +42,8 @@ class User < ActiveRecord::Base
   def format_mobile_number
     self.mobile_number = ApplicationHelper.format_mobile(mobile_number)
   end
+
+  def confirmed?
+    self.confirmed_at != nil
+  end
 end

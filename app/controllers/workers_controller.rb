@@ -1,6 +1,6 @@
 class WorkersController < ApplicationController
   before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
-#  before_action :require_confirmed_employer, only: [:show]
+  before_action :require_confirmed_employer, only: [:show]
   before_action :require_correct_worker, only: [:edit, :update, :destroy, :confirm]
 
   def index
@@ -100,5 +100,11 @@ class WorkersController < ApplicationController
   def require_correct_worker
     @worker = Worker.find(params[:id])
     redirect_to root_url unless current_worker?(@worker)
+  end
+
+  def require_confirmed_employer
+    # If there is currently someone signed in & if it is an employer
+    redirect_to confirm_user_url unless current_user.confirmed?
+
   end
 end
