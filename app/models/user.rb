@@ -44,6 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def confirmed?
-    self.confirmed_at != nil
+    confirmed_at != nil
   end
 end
