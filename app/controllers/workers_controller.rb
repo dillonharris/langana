@@ -111,7 +111,8 @@ class WorkersController < ApplicationController
   end
 
   def require_confirmed_employer
-    # If there is currently someone signed in & if it is an employer
-    redirect_to confirm_user_url unless current_user.confirmed?
+    if current_user
+      redirect_to confirm_user_url(current_user) unless current_user.confirmed_at
+    end
   end
 end

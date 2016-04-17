@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_signin
-    unless current_user
+    unless current_user || current_worker
       session[:intended_url] = request.url
       redirect_to new_session_url, alert: 'Please sign in first'
     end
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def assign_user
-    @current_user = current_employer || current_worker
+    @current_user = current_employer
   end
 
   def current_employer
