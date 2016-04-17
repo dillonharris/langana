@@ -12,4 +12,4 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
 
 Metrics/LineLength:
-    Max: 110
+    Max: 130
