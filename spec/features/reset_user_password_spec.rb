@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe "Resetting a user's password" do
   it 'has a link to it' do
-    user = FactoryGirl.create(:user, mobile_number: '+27795555555')
     visit new_session_path
     click_link('Forgot your password?')
     expect(current_path).to eq(forgot_password_path)
