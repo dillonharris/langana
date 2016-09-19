@@ -228,6 +228,8 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     sexp_processor (4.7.0)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     sinch_sms (2.1)
     slim (3.0.6)
       temple (~> 0.7.3)
@@ -296,6 +298,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  shoulda-matchers (~> 3.1)
   sinch_sms
   spring-commands-rspec
   turbolinks
@@ -303,5 +306,8 @@ DEPENDENCIES
   vcr
   webmock
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5
