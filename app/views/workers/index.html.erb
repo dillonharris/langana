@@ -7,7 +7,7 @@
   <ul id="users">
     <% @workers.each do |worker| %>
       <li>
-        <%= link_to worker.first_name, worker, {style: 'text-decoration:none' } %>
+        <%= link_to worker.first_name, worker, { style: 'text-decoration:none' } %>
         -
         <%= worker.service %>
       </li>
