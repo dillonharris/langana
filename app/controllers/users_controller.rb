@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_signin, except: [:index, :new_worker, :new_employer, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
-  before_action :require_correct_user, only: [:edit, :edit_worker, :edit_employer, :update, :destroy, :confirm, :verify_confirmation]
+  before_action :require_signin, except: [:index, :new, :create, :forgot_password, :send_reset_code, :reset_password, :new_password]
+  before_action :require_correct_user, only: [:edit, :update, :destroy, :confirm, :verify_confirmation]
 
   def index
     @users = User.all
@@ -8,19 +8,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to(confirm_user_path(current_user)) unless current_user.confirmed_at || current_user?(@user)
+    redirect_to(confirm_user_path(current_user)) unless current_user.confirmed_at
   end
 
-  def new_worker
-    @user = User.new
-    @user.role = 'worker'
-    @user.city = 'Cape Town'
-    @user.country = 'South Africa'
-  end
-
-  def new_employer
-    @user = User.new
-    @user.role = 'employer'
+  def new
+    @user = User.new(role: 'employer')
   end
 
   def create
@@ -30,13 +22,34 @@ class UsersController < ApplicationController
       ConfirmationCode.generate(@user)
       redirect_to confirm_user_path(@user), notice: 'Thanks for signing up! Please enter the confirmation code sent to your mobile phone'
     else
-      render :new_employer
+      flash[:alert] = 'User could not be created'
+      render :new
     end
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to @user, notice: 'Account successfully updated!'
+    else
+      flash[:alert] = 'Account could not be updated'
+      render :edit
+    end
+  end
+
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+    redirect_to root_url, alert: 'Account successfully deleted!'
   end
 
   def confirm
   end
 
+  # TODO this can be extracted to the application controller to handle workers and employers
+  # but first need to test this thoroughly on both sides before moving it
   def verify_confirmation
     submitted_code = params[:user][:mobile_confirmation_code]
     @user.confirmation_attempts += 1
@@ -104,36 +117,6 @@ class UsersController < ApplicationController
     else
       redirect_to new_password_user_path(@user), alert: 'Incorrect confirmation code'
     end
-  end
-
-  def edit
-    if @user.role == 'worker'
-      redirect_to edit_worker_user_path(@user)
-    else
-      redirect_to edit_employer_user_path(@user)
-    end
-  end
-
-  def edit_worker
-  end
-
-  def edit_employer
-  end
-
-  def update
-    if @user.update(user_params)
-      redirect_to @user, notice: 'Account successfully updated!'
-    elsif @user.role == 'worker'
-      render :edit_worker
-    else
-      render :edit_employer
-    end
-  end
-
-  def destroy
-    @user.destroy
-    session[:user_id] = nil
-    redirect_to root_url, alert: 'Account successfully deleted!'
   end
 
   private
